@@ -4,60 +4,56 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   flex: 1;
 `;
 
-export const TitleArea = styled.ImageBackground`
+export const TitleArea = styled.View`
   flex-direction: row;
-  height: ${hp('40.14%')};
+  height: ${hp('9.86%')};
+  align-items: center;
+  background-color: #fff;
+  border-color: #f2f1f3;
+  border-width: ${wp('0.36%')};
+  border-style: solid;
 `;
 
 export const Title = styled.Text`
   align-items: center;
   justify-content: center;
   font-size: ${hp('2.82%')};
-  line-height: ${hp('3.87%')};
-  color: #fff;
+  color: #625c70;
   font-weight: bold;
   margin-left: ${wp('7.5%')};
-  margin-top: ${hp('3.87%')};
 `;
 
-export const AreaInfo = styled.View`
+export const AreaInfo = styled.FlatList`
   background-color: #fff;
-  padding-right: ${wp('7.5%')};
-  padding-left: ${wp('7.5%')};
 `;
 
-export const TextTitle = styled.Text`
-  font-size: ${hp('2.82%')};
-  line-height: ${hp('3.87%')};
-  color: #625c70;
-  font-weight: bold;
-  margin-top: ${hp('5.63%')};
+export const NavButton = styled.TouchableOpacity`
+  background-color: rgba(165, 28, 96, 0.1);
+  height: ${hp('8.80%')};
+  opacity: 1;
+  justify-content: center;
 `;
 
-export const TextDesc = styled.Text`
+export const TextNavButton = styled.Text`
   font-size: ${hp('2.82%')};
-  line-height: ${hp('3.87%')};
-  color: #625c70;
+  color: rgba(98, 92, 112, 0.8);
   font-weight: normal;
-`;
-
-export const AreaProfessional = styled.View`
-  flex-direction: column;
+  align-items: center;
+  margin-left: ${wp('7.50%')};
 `;
 
 export const AreaSubmitButton = styled.View`
   justify-content: center;
   align-items: center;
-  margin-bottom: ${hp('4.75%')};
-  margin-top: ${hp('5.63%')};
+  margin-bottom: ${hp('2.88%')};
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
-  background-color: #a51c60;
+  background-color: rgb(165, 28, 96);
   height: ${hp('7.75%')};
   width: ${wp('71.25%')};
   align-items: center;

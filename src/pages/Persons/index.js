@@ -1,17 +1,17 @@
 import React from 'react';
-import { Image } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// import StackNav from '~/StackNav';
+import logo from '~/assets/logo.png';
 
 import Button from '~/components/Button';
 import {
   Container,
   BackgroundTitle,
+  Logo,
   Title,
   PersonArea,
   PersonImage,
@@ -30,8 +30,8 @@ export default function Pessoas() {
   return (
     <Container>
       <BackgroundTitle style={{ height: hp('9.86%') }}>
+        <Logo source={logo} />
         <Title>Pessoas</Title>
-        <Image source={require('~/assets/logo.svg')} />
       </BackgroundTitle>
       <PersonArea>
         <PersonImage source={require('~/assets/vini.jpg')} />
@@ -73,6 +73,7 @@ export default function Pessoas() {
             size={20}
             color="#625C70"
             style={{ marginRight: wp('5.63%'), alignItems: 'center' }}
+            onPress={() => {}}
           />
         </IconArea>
       </PeopleBar>

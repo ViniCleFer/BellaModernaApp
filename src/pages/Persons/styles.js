@@ -16,13 +16,16 @@ export const BackgroundTitle = styled(LinearGradient).attrs({
   end: { x: 1, y: 0 },
 })`
   flex-direction: row;
-  height: ${hp('9.86%')};
   align-items: center;
 `;
 
+export const Logo = styled.Image`
+  margin-left: ${wp('5.0%')};
+`;
+
 export const Title = styled.Text`
-  height: ${hp('3.17%')};
-  line-height: ${hp('3.87%')};
+  font-size: ${hp('3.17%')};
+  margin-left: ${wp('6.25%')};
   color: #fff;
   font-weight: bold;
 `;

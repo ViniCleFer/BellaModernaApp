@@ -5,7 +5,7 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import imagetitle from '~/assets/maternidade.png';
+import imagetitle from '~/assets/gestacao.png';
 
 import {
   Container,
@@ -20,7 +20,7 @@ import {
   TextSubmitButton,
 } from './styles';
 
-export default function Conversas() {
+export default function ProgramDetail() {
   return (
     <Container showsVerticalScrollIndicator={false}>
       <TitleArea source={imagetitle}>
@@ -30,25 +30,24 @@ export default function Conversas() {
           color="#fff"
           style={{ marginLeft: wp('7.5%'), marginTop: hp('4.23%') }}
         />
-        <Title>Programa Maternidade</Title>
+        <Title>Programa Gestação</Title>
       </TitleArea>
 
       <AreaInfo>
         <TextTitle>Programa</TextTitle>
         <TextDesc>
-          Sabemos que não é fácil passar pela adaptação de uma maternidade. Este
-          programa irá te ajudar a cuidar melhor do seu bebê durante esta fase
-          tão importante.
+          A gestação exige alguns cuidados especiais com a mulher e com o bebê.
+          O programa gestação irá acompanhar a sua gestação para te ajudar com
+          seu cuidado e do bebê durante a gravidez.
         </TextDesc>
         <AreaProfessional>
           <TextTitle>Profissionais</TextTitle>
-          <TextDesc>- Pediatra</TextDesc>
           <TextDesc>- Enfermeira Obstetra</TextDesc>
           <TextDesc>- Nutricionista</TextDesc>
         </AreaProfessional>
 
         <TextTitle>Público</TextTitle>
-        <TextDesc>Mães</TextDesc>
+        <TextDesc>Mulheres grávidas</TextDesc>
       </AreaInfo>
 
       <AreaSubmitButton>

@@ -12,8 +12,8 @@ export const TitleArea = styled.View`
   flex-direction: row;
   height: ${hp('9.86%')};
   align-items: center;
-  border-color: #f2f1f3;
   background-color: #fff;
+  border-color: #f2f1f3;
   border-width: ${wp('0.36%')};
   border-style: solid;
 `;

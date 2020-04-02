@@ -20,7 +20,7 @@ import {
   TextSubmitButton,
 } from './styles';
 
-export default function Conversas() {
+export default function MaternityProgram() {
   return (
     <Container showsVerticalScrollIndicator={false}>
       <TitleArea source={imagetitle}>

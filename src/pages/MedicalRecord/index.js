@@ -42,7 +42,7 @@ export default function MedicalRecord() {
           color="#625C70"
           style={{ marginLeft: wp('7.5%') }}
         />
-        <Title>Prontuário</Title>
+        <Title>Prontuários</Title>
       </TitleArea>
       <Input icon="search" placeholder="Pesquisar histórico" />
 
