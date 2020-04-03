@@ -18,7 +18,23 @@ import {
   TextSubmitButton,
 } from './styles';
 
-export default function ProfilePrograms() {
+export default function ProfilePrograms(props) {
+  const goMaternityProgram = () => {
+    props.navigation.navigate('ProgramDetailMaternity');
+  };
+
+  const goPregnancyProgram = () => {
+    props.navigation.navigate('ProgramDetailPregnancy');
+  };
+
+  const goToPrograms = () => {
+    props.navigation.navigate('Programs');
+  };
+
+  const navigateBack = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <Container>
       <TitleArea>
@@ -27,6 +43,7 @@ export default function ProfilePrograms() {
           size={(hp('2.82%'), wp('5%'))}
           color="#625C70"
           style={{ marginLeft: wp('7.5%') }}
+          onPress={navigateBack}
         />
         <Title>Programas cadastrados</Title>
       </TitleArea>
@@ -37,7 +54,10 @@ export default function ProfilePrograms() {
         keyExtractor={(item) => String(item)}
         renderItem={() => (
           <>
-            <NavButton activeOpacity={0.8} onPress={() => {}}>
+            <NavButton activeOpacity={0.8} onPress={goMaternityProgram}>
+              <TextNavButton>Maternidade</TextNavButton>
+            </NavButton>
+            <NavButton activeOpacity={0.8} onPress={goPregnancyProgram}>
               <TextNavButton>Gestação</TextNavButton>
             </NavButton>
           </>
@@ -45,7 +65,7 @@ export default function ProfilePrograms() {
       />
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={goToPrograms}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,

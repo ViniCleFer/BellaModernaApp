@@ -33,6 +33,8 @@ export const DateArea = styled.View`
   margin-top: ${hp('4.23%')};
   align-items: center;
   justify-content: center;
+  flex: 1;
+  margin-left: calc(100% -84);
 `;
 
 export const DateText = styled.Text`
@@ -54,6 +56,11 @@ export const Card = styled.View`
   margin-right: ${wp('2.5%')};
   margin-bottom: ${hp('0.18%')};
   margin-top: ${hp('3.17%')};
+`;
+
+export const Separator = styled.View`
+  width: ${wp('0.18%')};
+  background-color: #c6bddb;
 `;
 
 export const TimeLineCard = styled.View`

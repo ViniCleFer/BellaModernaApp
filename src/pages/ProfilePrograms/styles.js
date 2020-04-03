@@ -49,7 +49,8 @@ export const TextNavButton = styled.Text`
 export const AreaSubmitButton = styled.View`
   justify-content: center;
   align-items: center;
-  margin-bottom: ${hp('2.88%')};
+  padding-bottom: ${hp('2.88%')};
+  background-color: #fff;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`

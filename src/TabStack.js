@@ -6,14 +6,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Conversas from '~/pages/Conversations';
 import Profissionais from '~/pages/Professionals';
-import Pessoas from '~/pages/Persons';
+import StackPersons from '~/pages/StackPersons';
 import Mais from '~/pages/More';
 
 const TabStack = createBottomTabNavigator(
   {
     Conversas,
     Profissionais,
-    Pessoas,
+    StackPersons: {
+      screen: StackPersons,
+      navigationOptions: {
+        header: null,
+        title: 'Pessoas',
+      },
+    },
     Mais,
   },
   {
@@ -40,7 +46,7 @@ const TabStack = createBottomTabNavigator(
 
         if (routeName === 'Conversas') iconName = 'comments';
         else if (routeName === 'Profissionais') iconName = 'user-md';
-        else if (routeName === 'Pessoas') iconName = 'users';
+        else if (routeName === 'StackPersons') iconName = 'users';
         else if (routeName === 'Mais') iconName = 'ellipsis-h';
 
         return (

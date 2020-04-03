@@ -5,6 +5,7 @@ import {
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { Alert } from 'react-native';
 import logo from '~/assets/logo.png';
 
 import Button from '~/components/Button';
@@ -26,7 +27,19 @@ import {
   ButtonsArea,
 } from './styles';
 
-export default function Pessoas() {
+export default function Pessoas(props) {
+  const goProgramsProfile = () => {
+    props.navigation.navigate('ProfilePrograms');
+  };
+
+  const goMedicalRecord = () => {
+    props.navigation.navigate('MedicalRecord');
+  };
+
+  const goTimeLime = () => {
+    props.navigation.navigate('TimeLine');
+  };
+
   return (
     <Container>
       <BackgroundTitle style={{ height: hp('9.86%') }}>
@@ -41,9 +54,9 @@ export default function Pessoas() {
         </AreaInfo>
       </PersonArea>
       <ButtonsArea>
-        <Button onPress={() => {}}>Programas</Button>
-        <Button onPress={() => {}}>Prontuário</Button>
-        <Button onPress={() => {}}>Linha do tempo</Button>
+        <Button onPress={goProgramsProfile}>Programas</Button>
+        <Button onPress={goMedicalRecord}>Prontuário</Button>
+        <Button onPress={goTimeLime}>Linha do tempo</Button>
       </ButtonsArea>
       <PeopleBar>
         <CircleArea>
@@ -73,7 +86,12 @@ export default function Pessoas() {
             size={20}
             color="#625C70"
             style={{ marginRight: wp('5.63%'), alignItems: 'center' }}
-            onPress={() => {}}
+            onPress={() =>
+              Alert.alert(
+                'Atenção',
+                'Por favor, crie a página para adicionar dependentes'
+              )
+            }
           />
         </IconArea>
       </PeopleBar>

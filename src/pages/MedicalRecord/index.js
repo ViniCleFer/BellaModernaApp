@@ -32,7 +32,11 @@ import {
   Duration,
 } from './styles';
 
-export default function MedicalRecord() {
+export default function MedicalRecord(props) {
+  const navigateBack = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <Container>
       <TitleArea>
@@ -41,6 +45,7 @@ export default function MedicalRecord() {
           size={(hp('2.82%'), wp('5%'))}
           color="#625C70"
           style={{ marginLeft: wp('7.5%') }}
+          onPress={navigateBack}
         />
         <Title>Prontuários</Title>
       </TitleArea>

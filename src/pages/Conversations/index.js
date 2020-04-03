@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -27,7 +28,11 @@ import {
   LastReport,
 } from './styles';
 
-export default function Conversas() {
+export default function TimeLine(props) {
+  const navigateBack = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <Container>
       <TitleArea>
@@ -36,6 +41,7 @@ export default function Conversas() {
           size={(hp('2.82%'), wp('5%'))}
           color="#625C70"
           style={{ marginLeft: wp('7.5%') }}
+          onPress={navigateBack}
         />
         <Title>Linha do Tempo</Title>
       </TitleArea>
@@ -43,13 +49,14 @@ export default function Conversas() {
 
       <AreaInfo
         showsVerticalScrollIndicator={false}
-        data={[1]}
+        data={[1, 2]}
         keyExtractor={(item) => String(item)}
         renderItem={() => (
           <>
             <DateArea>
               <DateText>Hoje</DateText>
             </DateArea>
+
             <Card>
               <TimeLineCard>
                 <IconArea>
@@ -77,7 +84,7 @@ export default function Conversas() {
               <TimeLineCard>
                 <IconArea>
                   <Icon
-                    name="assignment-turned-in"
+                    name="edit"
                     size={(hp('2.82%'), wp('5%'))}
                     color="#A51C60"
                   />

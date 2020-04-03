@@ -14,7 +14,19 @@ import {
   TextNavButton,
 } from './styles';
 
-export default function Programs() {
+export default function Programs(props) {
+  const goMaternityProgram = () => {
+    props.navigation.navigate('ProgramDetailMaternity');
+  };
+
+  const goPregnancyProgram = () => {
+    props.navigation.navigate('ProgramDetailPregnancy');
+  };
+
+  const navigateBack = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <Container>
       <TitleArea>
@@ -23,6 +35,7 @@ export default function Programs() {
           size={(hp('2.82%'), wp('5%'))}
           color="#625C70"
           style={{ marginLeft: wp('7.5%') }}
+          onPress={navigateBack}
         />
         <Title>Todos os programas</Title>
       </TitleArea>
@@ -31,10 +44,10 @@ export default function Programs() {
         <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
           <TextNavButton>Adolescencia</TextNavButton>
         </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
+        <NavButton underlayColor="#f2f1f3" onPress={goPregnancyProgram}>
           <TextNavButton>Gestação</TextNavButton>
         </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
+        <NavButton underlayColor="#f2f1f3" onPress={goMaternityProgram}>
           <TextNavButton>Maternidade</TextNavButton>
         </NavButton>
         <NavButton underlayColor="#f2f1f3" onPress={() => {}}>

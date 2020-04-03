@@ -52,8 +52,9 @@ export const AreaProfessional = styled.View`
 export const AreaSubmitButton = styled.View`
   justify-content: center;
   align-items: center;
-  margin-bottom: ${hp('4.75%')};
-  margin-top: ${hp('5.63%')};
+  padding-bottom: ${hp('4.75%')};
+  padding-top: ${hp('5.63%')};
+  background-color: #fff;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`

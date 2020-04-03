@@ -20,7 +20,11 @@ import {
   TextSubmitButton,
 } from './styles';
 
-export default function ProgramDetail() {
+export default function ProgramDetail(props) {
+  const navigateBack = () => {
+    props.navigation.goBack();
+  };
+
   return (
     <Container showsVerticalScrollIndicator={false}>
       <TitleArea source={imagetitle}>
@@ -29,6 +33,7 @@ export default function ProgramDetail() {
           size={(hp('2.82%'), wp('5%'))}
           color="#fff"
           style={{ marginLeft: wp('7.5%'), marginTop: hp('4.23%') }}
+          onPress={navigateBack}
         />
         <Title>Programa Gestação</Title>
       </TitleArea>
