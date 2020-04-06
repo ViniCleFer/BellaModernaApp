@@ -1,4 +1,5 @@
 import React from 'react';
+// import { View } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -10,6 +11,7 @@ import {
   Container,
   TitleArea,
   Title,
+  DateView,
   DateArea,
   DateText,
   AreaInfo,
@@ -52,9 +54,11 @@ export default function TimeLine(props) {
         keyExtractor={(item) => String(item)}
         renderItem={() => (
           <>
-            <DateArea>
-              <DateText>Hoje</DateText>
-            </DateArea>
+            <DateView>
+              <DateArea>
+                <DateText>Hoje</DateText>
+              </DateArea>
+            </DateView>
             <Card>
               <TimeLineCard>
                 <IconArea>

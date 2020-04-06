@@ -25,16 +25,19 @@ export const Title = styled.Text`
   margin-left: ${wp('7.5%')};
 `;
 
+export const DateView = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
 export const DateArea = styled.View`
   height: ${hp('4.23%')};
   width: ${wp('26.25%')};
   background-color: #958fa3;
   border-radius: 50;
-  margin-top: ${hp('4.23%')};
+  margin-top: ${hp('2.11%')};
   align-items: center;
   justify-content: center;
-  flex: 1;
-  margin-left: calc(100% -84);
 `;
 
 export const DateText = styled.Text`
@@ -49,6 +52,8 @@ export const DateText = styled.Text`
 export const AreaInfo = styled.FlatList`
   background-color: #e5e5e5;
   flex: 1;
+  padding-bottom: ${hp('2.11%')};
+  padding-top: ${hp('2.11%')};
 `;
 
 export const Card = styled.View`
@@ -56,11 +61,6 @@ export const Card = styled.View`
   margin-right: ${wp('2.5%')};
   margin-bottom: ${hp('0.18%')};
   margin-top: ${hp('3.17%')};
-`;
-
-export const Separator = styled.View`
-  width: ${wp('0.18%')};
-  background-color: #c6bddb;
 `;
 
 export const TimeLineCard = styled.View`
@@ -131,4 +131,5 @@ export const LastReport = styled.Text`
   color: #958fa3;
   justify-content: center;
   margin-left: ${wp('5.47%')};
+  margin-bottom: ${hp('2.11%')};
 `;
