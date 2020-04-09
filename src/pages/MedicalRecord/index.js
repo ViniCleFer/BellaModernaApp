@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import api from '~/services/api';
 
 import Input from '~/components/Input';
 import {
@@ -26,16 +28,30 @@ import {
   InfoProblem,
   BodyText,
   InfoRisk,
-  ColorRiskGreen,
+  ColorRisk,
   BottomCard,
   CallType,
   Duration,
 } from './styles';
 
 export default function MedicalRecord(props) {
+  const [medRecords, setMedRecord] = useState([]);
+  const [userId, setUserId] = useState([]);
+
   const navigateBack = () => {
     props.navigation.goBack();
   };
+
+  async function loadMedRecords() {
+    const response = api.get(`medical_record:${userId}`);
+
+    setMedRecord(response.data);
+    setUserId(response.headers);
+  }
+
+  useEffect(() => {
+    loadMedRecords();
+  }, []);
 
   return (
     <Container>
@@ -53,19 +69,20 @@ export default function MedicalRecord(props) {
 
       <AreaInfo
         showsVerticalScrollIndicator={false}
-        data={[1]}
-        keyExtractor={(item) => String(item)}
-        renderItem={() => (
+        data={medRecords}
+        // eslint-disable-next-line prettier/prettier
+        keyExtractor={medRecord => String(medRecord._id)}
+        renderItem={({ item: medRecord }) => (
           <>
             <DateArea>
               <DateText>31 de Março de 2020, Terça-feira</DateText>
             </DateArea>
             <Card>
               <TopCard>
-                <DoctorImage source={require('~/assets/vini.jpg')} />
+                <DoctorImage source={medRecord.image} />
                 <AreaDoctorInfo>
-                  <DoctorName>Vinicius Fernandes</DoctorName>
-                  <DoctorSpecialty>Clínico da Parada</DoctorSpecialty>
+                  <DoctorName>{medRecord.medical}</DoctorName>
+                  <DoctorSpecialty>{medRecord.especiality}</DoctorSpecialty>
                 </AreaDoctorInfo>
                 <IconArea>
                   <Icon
@@ -89,9 +106,7 @@ export default function MedicalRecord(props) {
                     size={18}
                     style={{ marginRight: wp('1.88%') }}
                   />
-                  <BodyText>
-                    Excesso de sono e baixo interesse pela amamentação
-                  </BodyText>
+                  <BodyText>{medRecord.problems[0]}</BodyText>
                 </InfoProblem>
                 <InfoProblem>
                   <Icon
@@ -100,43 +115,34 @@ export default function MedicalRecord(props) {
                     size={18}
                     style={{ marginRight: wp('1.88%') }}
                   />
-                  <BodyText>
-                    Dúvidas sobre livre demanda / Horário das mamadas
-                  </BodyText>
+                  <BodyText>{medRecord.problems[1]}</BodyText>
                 </InfoProblem>
 
                 <BodyTitle>Você faz amamentação exclusiva?</BodyTitle>
-                <BodyText>Não</BodyText>
+                <BodyText>{medRecord.questions[0]}</BodyText>
 
                 <BodyTitle>A vacinação do bebê está em dia? </BodyTitle>
-                <BodyText>Não</BodyText>
+                <BodyText>{medRecord.questions[1]}</BodyText>
 
                 <BodyTitle>Por que?</BodyTitle>
-                <BodyText>
-                  Porque não estou trabalhando muito e não estou conseguindo
-                  separar tempo para ir ao hospital
-                </BodyText>
+                <BodyText>{medRecord.questions[2]}</BodyText>
 
                 <BodyTitle>Descrição resumida da interação</BodyTitle>
-                <BodyText>
-                  A paciente esta com dor de cabeça durante as noites e não
-                  consegue dormir, a falta de sono deixa mais cansada e baxia a
-                  imunidade
-                </BodyText>
+                <BodyText>{medRecord.questions[3]}</BodyText>
 
                 <BodyTitle>Fechamento</BodyTitle>
-                <BodyText>Internação concluída</BodyText>
+                <BodyText>{medRecord.conclusion}</BodyText>
 
                 <BodyTitle>Classificação de risco</BodyTitle>
                 <InfoRisk>
-                  <ColorRiskGreen />
-                  <BodyText>Verde</BodyText>
+                  <ColorRisk>{medRecord.level}</ColorRisk>
+                  <BodyText>{medRecord.risk}</BodyText>
                 </InfoRisk>
               </BodyCard>
               <Separator />
               <BottomCard>
-                <CallType>Chamada de vídeo</CallType>
-                <Duration>Das 20:10 às 20:40</Duration>
+                <CallType>{medRecord.attendance}</CallType>
+                <Duration>Das {medRecord.duration}</Duration>
               </BottomCard>
             </Card>
           </>
@@ -145,3 +151,12 @@ export default function MedicalRecord(props) {
     </Container>
   );
 }
+
+// //** {if ({medRecord.level} === 1 ) {
+//  <ColorRiskGreen />
+// } else {
+// <ColorRiskBlue />
+
+// }} */
+
+// ///

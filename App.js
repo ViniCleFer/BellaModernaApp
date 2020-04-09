@@ -1,9 +1,22 @@
-import { createAppContainer } from 'react-navigation';
-import { YellowBox } from 'react-native';
+import React from 'react';
+import { StatusBar, YellowBox } from 'react-native';
 
-import MainStack from '~/pages/MainStack';
-// import StackNav from '~/StackNav';
+import '~/config/ReactotronConfig';
+
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { store, persistor } from '~/store';
+
+import Index from './src';
 
 YellowBox.ignoreWarnings(['']);
 
-export default createAppContainer(MainStack);
+export default () => (
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <StatusBar barStyle="light-content" backgroundColor="#A51C60" />
+      <Index />
+    </PersistGate>
+  </Provider>
+);
