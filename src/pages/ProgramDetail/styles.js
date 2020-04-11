@@ -49,6 +49,10 @@ export const AreaProfessional = styled.View`
   flex-direction: column;
 `;
 
+export const AreaTextDesc = styled.FlatList`
+  flex-direction: column;
+`;
+
 export const AreaSubmitButton = styled.View`
   justify-content: center;
   align-items: center;

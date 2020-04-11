@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// import { View } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import api from '~/services/api';
 
 import {
   Container,
@@ -15,13 +18,17 @@ import {
 } from './styles';
 
 export default function Programs(props) {
-  const goMaternityProgram = () => {
-    props.navigation.navigate('ProgramDetailMaternity');
-  };
+  const [programs, setPrograms] = useState([]);
 
-  const goPregnancyProgram = () => {
-    props.navigation.navigate('ProgramDetailPregnancy');
-  };
+  useEffect(() => {
+    async function loadPrograms() {
+      const response = await api.get('/programs');
+
+      setPrograms(response.data);
+    }
+
+    loadPrograms();
+  }, []);
 
   const navigateBack = () => {
     props.navigation.goBack();
@@ -39,24 +46,23 @@ export default function Programs(props) {
         />
         <Title>Todos os programas</Title>
       </TitleArea>
-
-      <AreaInfo>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
-          <TextNavButton>Adolescencia</TextNavButton>
-        </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={goPregnancyProgram}>
-          <TextNavButton>Gestação</TextNavButton>
-        </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={goMaternityProgram}>
-          <TextNavButton>Maternidade</TextNavButton>
-        </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
-          <TextNavButton>Menopausa</TextNavButton>
-        </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
-          <TextNavButton>Pediatria</TextNavButton>
-        </NavButton>
-      </AreaInfo>
+      <AreaInfo
+        showsVerticalScrollIndicator={false}
+        data={programs}
+        keyExtractor={(program) => String(program)}
+        renderItem={({ item: program }) => (
+          <>
+            <NavButton
+              underlayColor="#f2f1f3"
+              onPress={() =>
+                props.navigation.navigate('ProgramDetail', { program })
+              }
+            >
+              <TextNavButton>{program.name}</TextNavButton>
+            </NavButton>
+          </>
+        )}
+      />
     </Container>
   );
 }

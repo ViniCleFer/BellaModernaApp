@@ -27,7 +27,7 @@ export const Title = styled.Text`
   margin-left: ${wp('7.5%')};
 `;
 
-export const AreaInfo = styled.View`
+export const AreaInfo = styled.FlatList`
   background-color: #fff;
 `;
 

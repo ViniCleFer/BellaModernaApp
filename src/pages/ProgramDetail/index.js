@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import imagetitle from '~/assets/gestacao.png';
 
+// import api from '~/services/api';
+
 import {
   Container,
   TitleArea,
@@ -15,12 +17,15 @@ import {
   TextTitle,
   TextDesc,
   AreaProfessional,
+  AreaTextDesc,
   AreaSubmitButton,
   SubmitButton,
   TextSubmitButton,
 } from './styles';
 
 export default function ProgramDetail(props) {
+  const program = props.navigation.getParam('program');
+
   const navigateBack = () => {
     props.navigation.goBack();
   };
@@ -35,20 +40,17 @@ export default function ProgramDetail(props) {
           style={{ marginLeft: wp('7.5%'), marginTop: hp('4.23%') }}
           onPress={navigateBack}
         />
-        <Title>Programa Gestação</Title>
+        <Title>Programa {program.name}</Title>
       </TitleArea>
 
       <AreaInfo>
         <TextTitle>Programa</TextTitle>
-        <TextDesc>
-          A gestação exige alguns cuidados especiais com a mulher e com o bebê.
-          O programa gestação irá acompanhar a sua gestação para te ajudar com
-          seu cuidado e do bebê durante a gravidez.
-        </TextDesc>
+        <TextDesc>{program.description}</TextDesc>
         <AreaProfessional>
           <TextTitle>Profissionais</TextTitle>
-          <TextDesc>- Enfermeira Obstetra</TextDesc>
-          <TextDesc>- Nutricionista</TextDesc>
+          {program.professionals.map((professionals) => (
+            <TextDesc key={professionals}>{program.professionals}</TextDesc>
+          ))}
         </AreaProfessional>
 
         <TextTitle>Público</TextTitle>

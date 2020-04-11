@@ -83,7 +83,10 @@ export default function Conversas(props) {
           renderItem={({ item }) => (
             <>
               <BorderCircle>
-                <PeopleCircle onPress={() => {}} source={{ uri: item.image }} />
+                <PeopleCircle
+                  onPress={() => {}}
+                  source={{ uri: item.image_url }}
+                />
               </BorderCircle>
             </>
           )}
