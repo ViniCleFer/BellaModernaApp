@@ -8,6 +8,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert } from 'react-native';
 import logo from '~/assets/logo.png';
 
+import api from '~/services/api';
+
 import Button from '~/components/Button';
 import {
   Container,

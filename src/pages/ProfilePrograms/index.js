@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// ShadowButton,
+import { useSelector } from 'react-redux';
+
+import api from '~/services/api';
 
 import {
   Container,
@@ -19,6 +21,20 @@ import {
 } from './styles';
 
 export default function ProfilePrograms(props) {
+  const profile = useSelector((state) => state.user.profile);
+
+  const [programSubs, setProgramSubs] = useState([]);
+
+  useEffect(() => {
+    async function loadProgramSubs() {
+      const response = await api.get(`/program/${profile.id}`);
+
+      setProgramSubs(response.data);
+    }
+
+    loadProgramSubs();
+  }, []);
+
   const goMaternityProgram = () => {
     props.navigation.navigate('ProgramDetailMaternity');
   };
@@ -50,15 +66,12 @@ export default function ProfilePrograms(props) {
 
       <AreaInfo
         showsVerticalScrollIndicator={false}
-        data={[1]}
+        data={programSubs}
         keyExtractor={(item) => String(item)}
-        renderItem={() => (
+        renderItem={({ item }) => (
           <>
             <NavButton activeOpacity={0.8} onPress={goMaternityProgram}>
-              <TextNavButton>Maternidade</TextNavButton>
-            </NavButton>
-            <NavButton activeOpacity={0.8} onPress={goPregnancyProgram}>
-              <TextNavButton>Gestação</TextNavButton>
+              <TextNavButton>{item.name}</TextNavButton>
             </NavButton>
           </>
         )}

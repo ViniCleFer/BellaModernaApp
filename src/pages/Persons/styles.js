@@ -6,6 +6,7 @@ import {
 } from 'react-native-responsive-screen';
 
 export const Container = styled.View`
+  background-color: #fff;
   flex: 1;
 `;
 
@@ -34,6 +35,7 @@ export const PersonArea = styled.View`
   height: ${hp('13.03%')};
   flex-direction: row;
   align-items: center;
+  background-color: #fff;
 `;
 
 export const PersonImage = styled.Image`
