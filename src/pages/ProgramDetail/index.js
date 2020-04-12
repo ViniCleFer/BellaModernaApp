@@ -1,13 +1,15 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
 
 import imagetitle from '~/assets/gestacao.png';
 
-// import api from '~/services/api';
+import api from '~/services/api';
 
 import {
   Container,
@@ -17,7 +19,6 @@ import {
   TextTitle,
   TextDesc,
   AreaProfessional,
-  AreaTextDesc,
   AreaSubmitButton,
   SubmitButton,
   TextSubmitButton,
@@ -29,6 +30,16 @@ export default function ProgramDetail(props) {
   const navigateBack = () => {
     props.navigation.goBack();
   };
+
+  const profile = useSelector((state) => state.user.profile);
+
+  async function subscribe() {
+    const response = await api.post(`/program/${program._id}/${profile.id}`);
+
+    Alert.alert('Inscrição concluída com sucesso');
+
+    props.navigation.navigate('ProfilePrograms');
+  }
 
   return (
     <Container showsVerticalScrollIndicator={false}>
@@ -49,17 +60,17 @@ export default function ProgramDetail(props) {
         <AreaProfessional>
           <TextTitle>Profissionais</TextTitle>
           {program.professionals.map((professionals) => (
-            <TextDesc key={professionals}>{program.professionals}</TextDesc>
+            <TextDesc key={professionals}>{professionals}</TextDesc>
           ))}
         </AreaProfessional>
 
         <TextTitle>Público</TextTitle>
-        <TextDesc>Mulheres grávidas</TextDesc>
+        <TextDesc>{program.public}</TextDesc>
       </AreaInfo>
 
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={subscribe}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,
