@@ -16,7 +16,7 @@ export default function SignIn({ navigation }) {
 
   // const [email, setEmail] = useState('');
 
-  const email = 'viniclefer@gmail.com';
+  const email = 'vini@gmail.com';
 
   const loading = useSelector((state) => state.auth.loading);
 

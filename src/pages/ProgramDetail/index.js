@@ -34,11 +34,11 @@ export default function ProgramDetail(props) {
   const profile = useSelector((state) => state.user.profile);
 
   async function subscribe() {
-    const response = await api.post(`/program/${program._id}/${profile.id}`);
+    await api.post(`/program/${program._id}/${profile.id}`);
 
     Alert.alert('Inscrição concluída com sucesso');
 
-    props.navigation.navigate('ProfilePrograms');
+    props.navigation.navigate('ProfilePrograms', { program });
   }
 
   return (

@@ -22,6 +22,9 @@ import {
 
 export default function ProfilePrograms(props) {
   const profile = useSelector((state) => state.user.profile);
+  const program = props.navigation.getParam('program');
+
+  const { name } = program;
 
   const [programSubs, setProgramSubs] = useState([]);
 
@@ -33,15 +36,7 @@ export default function ProfilePrograms(props) {
     }
 
     loadProgramSubs();
-  }, []);
-
-  const goMaternityProgram = () => {
-    props.navigation.navigate('ProgramDetailMaternity');
-  };
-
-  const goPregnancyProgram = () => {
-    props.navigation.navigate('ProgramDetailPregnancy');
-  };
+  }, [setProgramSubs]);
 
   const goToPrograms = () => {
     props.navigation.navigate('Programs');
@@ -70,7 +65,7 @@ export default function ProfilePrograms(props) {
         keyExtractor={(item) => String(item)}
         renderItem={({ item }) => (
           <>
-            <NavButton activeOpacity={0.8} onPress={goMaternityProgram}>
+            <NavButton activeOpacity={0.8} onPress={() => {}}>
               <TextNavButton>{item.name}</TextNavButton>
             </NavButton>
           </>

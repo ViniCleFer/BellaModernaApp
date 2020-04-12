@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Text } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
 
 import api from '~/services/api';
 
@@ -14,6 +16,7 @@ import {
   Title,
   DateArea,
   DateText,
+  AreaProblem,
   AreaInfo,
   Card,
   TopCard,
@@ -35,21 +38,22 @@ import {
 } from './styles';
 
 export default function MedicalRecord(props) {
+  const profile = useSelector((state) => state.user.profile);
+
   const [medRecords, setMedRecord] = useState([]);
-  const [userId, setUserId] = useState([]);
+  const [risk, setRisk] = useState([]);
 
   const navigateBack = () => {
     props.navigation.goBack();
   };
 
-  async function loadMedRecords() {
-    const response = api.get(`medical_record:${userId}`);
-
-    setMedRecord(response.data);
-    setUserId(response.headers);
-  }
-
   useEffect(() => {
+    async function loadMedRecords() {
+      const response = await api.get(`/medical_record/${profile.id}`);
+
+      setMedRecord(response.data);
+    }
+
     loadMedRecords();
   }, []);
 
@@ -70,19 +74,18 @@ export default function MedicalRecord(props) {
       <AreaInfo
         showsVerticalScrollIndicator={false}
         data={medRecords}
-        // eslint-disable-next-line prettier/prettier
-        keyExtractor={medRecord => String(medRecord._id)}
-        renderItem={({ item: medRecord }) => (
+        keyExtractor={(item) => String(item)}
+        renderItem={({ item }) => (
           <>
             <DateArea>
               <DateText>31 de Março de 2020, Terça-feira</DateText>
             </DateArea>
             <Card>
               <TopCard>
-                <DoctorImage source={medRecord.image} />
+                <DoctorImage source={{ uri: item.image }} />
                 <AreaDoctorInfo>
-                  <DoctorName>{medRecord.medical}</DoctorName>
-                  <DoctorSpecialty>{medRecord.especiality}</DoctorSpecialty>
+                  <DoctorName>{item.medical}</DoctorName>
+                  <DoctorSpecialty>{item.especiality}</DoctorSpecialty>
                 </AreaDoctorInfo>
                 <IconArea>
                   <Icon
@@ -99,50 +102,44 @@ export default function MedicalRecord(props) {
               <Separator />
               <BodyCard>
                 <BodyTitle>Problemas</BodyTitle>
-                <InfoProblem>
-                  <Icon
-                    name="check"
-                    color="#A51C60"
-                    size={18}
-                    style={{ marginRight: wp('1.88%') }}
-                  />
-                  <BodyText>{medRecord.problems[0]}</BodyText>
-                </InfoProblem>
-                <InfoProblem>
-                  <Icon
-                    name="check"
-                    color="#A51C60"
-                    size={18}
-                    style={{ marginRight: wp('1.88%') }}
-                  />
-                  <BodyText>{medRecord.problems[1]}</BodyText>
-                </InfoProblem>
-
+                <AreaProblem>
+                  {item.problems.map((problems) => (
+                    <InfoProblem>
+                      <Icon
+                        name="check"
+                        color="#A51C60"
+                        size={18}
+                        style={{ marginRight: wp('1.88%') }}
+                      />
+                      <BodyText>{problems}</BodyText>
+                    </InfoProblem>
+                  ))}
+                </AreaProblem>
                 <BodyTitle>Você faz amamentação exclusiva?</BodyTitle>
-                <BodyText>{medRecord.questions[0]}</BodyText>
+                <BodyText>{item.questions[0]}</BodyText>
 
                 <BodyTitle>A vacinação do bebê está em dia? </BodyTitle>
-                <BodyText>{medRecord.questions[1]}</BodyText>
+                <BodyText>{item.questions[1]}</BodyText>
 
                 <BodyTitle>Por que?</BodyTitle>
-                <BodyText>{medRecord.questions[2]}</BodyText>
+                <BodyText>{item.questions[2]}</BodyText>
 
                 <BodyTitle>Descrição resumida da interação</BodyTitle>
-                <BodyText>{medRecord.questions[3]}</BodyText>
+                <BodyText>{item.questions[3]}</BodyText>
 
                 <BodyTitle>Fechamento</BodyTitle>
-                <BodyText>{medRecord.conclusion}</BodyText>
+                <BodyText>{item.conclusion}</BodyText>
 
                 <BodyTitle>Classificação de risco</BodyTitle>
                 <InfoRisk>
-                  <ColorRisk>{medRecord.level}</ColorRisk>
-                  <BodyText>{medRecord.risk}</BodyText>
+                  <ColorRisk level={item.level} />
+                  <BodyText>{item.risk}</BodyText>
                 </InfoRisk>
               </BodyCard>
               <Separator />
               <BottomCard>
-                <CallType>{medRecord.attendance}</CallType>
-                <Duration>Das {medRecord.duration}</Duration>
+                <CallType>{item.attendance}</CallType>
+                <Duration>Das {item.duration}</Duration>
               </BottomCard>
             </Card>
           </>

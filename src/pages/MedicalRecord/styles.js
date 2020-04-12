@@ -114,9 +114,10 @@ export const BodyTitle = styled.Text`
   padding-top: ${hp('2.82%')};
 `;
 
+export const AreaProblem = styled.View``;
+
 export const InfoProblem = styled.View`
   flex-direction: row;
-  align-items: flex-start;
 `;
 
 export const BodyText = styled.Text`
@@ -130,21 +131,12 @@ export const InfoRisk = styled.View`
   flex-direction: row;
 `;
 
-export const ColorRiskGreen = styled.View`
+export const ColorRisk = styled.Text`
   height: ${hp('2.82%')};
   width: ${wp('7.5%')};
   margin-right: ${wp('1.25%')};
   border-radius: 4;
-  background-color: #25d366;
-  justify-content: center;
-`;
-
-export const ColorRiskBlue = styled.View`
-  height: ${hp('2.82%')};
-  width: ${wp('7.5%')};
-  margin-right: ${wp('1.25%')};
-  border-radius: 4;
-  background-color: #2f80ed;
+  background-color: ${(props) => (props.level === 1 ? '#25d366' : '#2f80ed')};
 `;
 
 export const BottomCard = styled.View`

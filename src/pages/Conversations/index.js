@@ -42,6 +42,8 @@ export default function Conversas(props) {
       setDependents(response.data);
     }
 
+    console.log(profile.image_url);
+
     loadDependents();
   }, []);
 
@@ -64,7 +66,11 @@ export default function Conversas(props) {
         <Title>Pessoas</Title>
       </BackgroundTitle>
       <PersonArea>
-        <PersonImage source={require('~/assets/vini.jpg')} />
+        <PersonImage
+          style={{
+            uri: profile.image_url,
+          }}
+        />
         <AreaInfo>
           <PersonName>{profile.name}</PersonName>
           <PersonAge>{profile.birth}</PersonAge>
@@ -91,6 +97,7 @@ export default function Conversas(props) {
             </>
           )}
         />
+
         <IconArea>
           <Icon
             name="add-circle"

@@ -38,7 +38,7 @@ export const PersonArea = styled.View`
   background-color: #fff;
 `;
 
-export const PersonImage = styled.Image`
+export const PersonImage = styled.View`
   height: ${hp('7.39%')};
   width: ${wp('13.13%')};
   margin-left: ${wp('5.0%')};
