@@ -15,7 +15,7 @@ YellowBox.ignoreWarnings(['']);
 export default () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <StatusBar barStyle="light-content" backgroundColor="#A51C60" />
+      <StatusBar barStyle="light-content" />
       <Index />
     </PersistGate>
   </Provider>

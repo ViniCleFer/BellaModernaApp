@@ -34,22 +34,26 @@ import {
   ButtonsArea,
 } from './styles';
 
-export default function Pessoas(props) {
+export default function Dependents(props) {
   const profile = useSelector((state) => state.user.profile);
+  const dependent = props.navigation.getParam('item');
 
-  const [dependentsProfile, setDependentsProfile] = useState([]);
+  // console.log(dependent);
+
+  const { id } = dependent;
+  console.log(id);
+
+  const [dependents, setDependents] = useState([]);
 
   useEffect(() => {
     async function loadDependents() {
       const response = await api.get(`/dependent/${profile.id}`);
 
-      setDependentsProfile(response.data);
+      setDependents(response.data);
     }
 
     loadDependents();
-  }, []);
-
-  const { id } = profile;
+  }, [dependent]);
 
   const goProgramsProfile = () => {
     props.navigation.navigate('ProfilePrograms', { id });
@@ -65,11 +69,11 @@ export default function Pessoas(props) {
 
   const dateFormatted = useMemo(
     () =>
-      formatDistanceToNowStrict(new Date(profile.birth), {
+      formatDistanceToNowStrict(new Date(dependent.birth), {
         locale: pt,
         addSuffix: false,
       }),
-    [profile.birth]
+    [dependent.birth]
   );
 
   return (
@@ -82,11 +86,11 @@ export default function Pessoas(props) {
         <PersonImage
           style={{ heigh: 50, width: 50 }}
           source={{
-            uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
+            uri: `http://192.168.0.13:3333/files/${dependent.image_url}`,
           }}
         />
         <AreaInfo>
-          <PersonName>{profile.name}</PersonName>
+          <PersonName>{dependent.name}</PersonName>
           <PersonAge>{dateFormatted}</PersonAge>
         </AreaInfo>
       </PersonArea>
@@ -97,9 +101,9 @@ export default function Pessoas(props) {
       </ButtonsArea>
       <PeopleBar>
         <ProfileArea activeOpacity={0.6}>
-          <BorderCircle active>
+          <BorderCircle>
             <PeopleCircle
-              onPress={() => props.navigation.navigate('Pessoas', { profile })}
+              onPress={() => props.navigation.navigate('Pessoas')}
               source={{
                 uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
               }}
@@ -107,19 +111,17 @@ export default function Pessoas(props) {
           </BorderCircle>
         </ProfileArea>
         <CircleArea
-          data={dependentsProfile}
+          data={dependents}
           horizontal
           keyExtractor={(item) => String(item)}
           renderItem={({ item }) => (
             <>
-              <DependentArea
-                activeOpacity={0.6}
-                onPress={() =>
-                  props.navigation.navigate('Dependents', { item })
-                }
-              >
-                <BorderCircle>
+              <DependentArea activeOpacity={0.6}>
+                <BorderCircle active={item.id === dependent.id}>
                   <PeopleCircle
+                    onPress={() =>
+                      props.navigation.navigate('Dependents', { item })
+                    }
                     source={{
                       uri: `http://192.168.0.13:3333/files/${item.image_url}`,
                     }}

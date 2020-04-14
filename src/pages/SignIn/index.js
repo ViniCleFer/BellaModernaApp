@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -14,9 +14,7 @@ import { Container, Form, FormInput, SubmitButton } from './styles';
 export default function SignIn({ navigation }) {
   const dispatch = useDispatch();
 
-  // const [email, setEmail] = useState('');
-
-  const email = 'vini@gmail.com';
+  const email = 'viniclefer@gmail.com';
 
   const loading = useSelector((state) => state.auth.loading);
 

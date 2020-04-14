@@ -4,7 +4,6 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
 
 import api from '~/services/api';
 
@@ -21,25 +20,22 @@ import {
 } from './styles';
 
 export default function ProfilePrograms(props) {
-  const profile = useSelector((state) => state.user.profile);
-  const program = props.navigation.getParam('program');
-
-  const { name } = program;
+  const id = props.navigation.getParam('id');
 
   const [programSubs, setProgramSubs] = useState([]);
 
   useEffect(() => {
     async function loadProgramSubs() {
-      const response = await api.get(`/program/${profile.id}`);
+      const response = await api.get(`/program/${id}`);
 
       setProgramSubs(response.data);
     }
 
     loadProgramSubs();
-  }, [setProgramSubs]);
+  }, []);
 
   const goToPrograms = () => {
-    props.navigation.navigate('Programs');
+    props.navigation.navigate('Programs', { id });
   };
 
   const navigateBack = () => {

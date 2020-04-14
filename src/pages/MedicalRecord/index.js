@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Text } from 'react-native';
+import React, { useState, useEffect, useMemo } from 'react';
+import {
+  Collapse,
+  CollapseHeader,
+  CollapseBody,
+} from 'accordion-collapse-react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import api from '~/services/api';
 
@@ -38,10 +43,10 @@ import {
 } from './styles';
 
 export default function MedicalRecord(props) {
-  const profile = useSelector((state) => state.user.profile);
+  const id = props.navigation.getParam('id');
 
   const [medRecords, setMedRecord] = useState([]);
-  const [risk, setRisk] = useState([]);
+  const [activeIcon, setActiveIcon] = useState('more');
 
   const navigateBack = () => {
     props.navigation.goBack();
@@ -49,13 +54,21 @@ export default function MedicalRecord(props) {
 
   useEffect(() => {
     async function loadMedRecords() {
-      const response = await api.get(`/medical_record/${profile.id}`);
+      const response = await api.get(`/medical_record/${id}`);
 
       setMedRecord(response.data);
     }
 
     loadMedRecords();
-  }, []);
+  }, [id]);
+
+  const dateFormatted = useMemo(
+    () =>
+      format(new Date(), "d 'de' MMMM 'de' yyyy, iiii", {
+        locale: pt,
+      }),
+    []
+  );
 
   return (
     <Container>
@@ -78,55 +91,83 @@ export default function MedicalRecord(props) {
         renderItem={({ item }) => (
           <>
             <DateArea>
-              <DateText>31 de Março de 2020, Terça-feira</DateText>
+              <DateText>{dateFormatted}</DateText>
             </DateArea>
             <Card>
-              <TopCard>
-                <DoctorImage source={{ uri: item.image }} />
-                <AreaDoctorInfo>
-                  <DoctorName>{item.medical}</DoctorName>
-                  <DoctorSpecialty>{item.especiality}</DoctorSpecialty>
-                </AreaDoctorInfo>
-                <IconArea>
-                  <Icon
-                    name="expand-more"
-                    size={(wp('3.75%'), hp('2.32%'))}
-                    color="#625C70"
-                    style={{
-                      marginRight: wp('6.88%'),
-                      alignItems: 'center',
-                    }}
-                  />
-                </IconArea>
-              </TopCard>
-              <Separator />
-              <BodyCard>
-                <BodyTitle>Problemas</BodyTitle>
-                <AreaProblem>
-                  {item.problems.map((problems) => (
-                    <InfoProblem>
+              <Collapse>
+                <CollapseHeader>
+                  <TopCard>
+                    <DoctorImage
+                      source={{
+                        uri: `http://192.168.0.13:3333/files/${item.image_url}`,
+                      }}
+                    />
+                    <AreaDoctorInfo>
+                      <DoctorName>{item.medical}</DoctorName>
+                      <DoctorSpecialty>{item.especiality}</DoctorSpecialty>
+                    </AreaDoctorInfo>
+
+                    <IconArea onPress={() => setActiveIcon('less')}>
                       <Icon
-                        name="check"
-                        color="#A51C60"
-                        size={18}
-                        style={{ marginRight: wp('1.88%') }}
+                        name={activeIcon}
+                        size={(wp('3.75%'), hp('2.32%'))}
+                        color="#625C70"
+                        style={{
+                          marginRight: wp('6.88%'),
+                          alignItems: 'center',
+                        }}
                       />
-                      <BodyText>{problems}</BodyText>
-                    </InfoProblem>
-                  ))}
-                </AreaProblem>
-                <BodyTitle>Você faz amamentação exclusiva?</BodyTitle>
-                <BodyText>{item.questions[0]}</BodyText>
+                    </IconArea>
+                    <IconArea onPress={() => setActiveIcon('less')}>
+                      <Icon
+                        name="expand-less"
+                        size={(wp('3.75%'), hp('2.32%'))}
+                        color="#625C70"
+                        style={{
+                          marginRight: wp('6.88%'),
+                          alignItems: 'center',
+                        }}
+                      />
+                    </IconArea>
+                  </TopCard>
 
-                <BodyTitle>A vacinação do bebê está em dia? </BodyTitle>
-                <BodyText>{item.questions[1]}</BodyText>
+                  <Separator />
 
-                <BodyTitle>Por que?</BodyTitle>
-                <BodyText>{item.questions[2]}</BodyText>
+                  <BodyCard>
+                    <BodyTitle>Problemas</BodyTitle>
+                    <AreaProblem>
+                      {item.problems.map((problems) => (
+                        <InfoProblem>
+                          <Icon
+                            name="check"
+                            color="#A51C60"
+                            size={18}
+                            style={{ marginRight: wp('1.88%') }}
+                          />
+                          <BodyText>{problems}</BodyText>
+                        </InfoProblem>
+                      ))}
+                    </AreaProblem>
+                  </BodyCard>
+                </CollapseHeader>
+                <CollapseBody>
+                  <BodyCard>
+                    <BodyTitle>Você faz amamentação exclusiva?</BodyTitle>
+                    <BodyText>{item.questions[0]}</BodyText>
 
-                <BodyTitle>Descrição resumida da interação</BodyTitle>
-                <BodyText>{item.questions[3]}</BodyText>
+                    <BodyTitle>A vacinação do bebê está em dia? </BodyTitle>
+                    <BodyText>{item.questions[1]}</BodyText>
 
+                    <BodyTitle>Por que?</BodyTitle>
+                    <BodyText>{item.questions[2]}</BodyText>
+
+                    <BodyTitle>Descrição resumida da interação</BodyTitle>
+                    <BodyText>{item.questions[3]}</BodyText>
+                  </BodyCard>
+                </CollapseBody>
+              </Collapse>
+
+              <BodyCard>
                 <BodyTitle>Fechamento</BodyTitle>
                 <BodyText>{item.conclusion}</BodyText>
 
@@ -137,6 +178,7 @@ export default function MedicalRecord(props) {
                 </InfoRisk>
               </BodyCard>
               <Separator />
+
               <BottomCard>
                 <CallType>{item.attendance}</CallType>
                 <Duration>Das {item.duration}</Duration>
@@ -148,12 +190,3 @@ export default function MedicalRecord(props) {
     </Container>
   );
 }
-
-// //** {if ({medRecord.level} === 1 ) {
-//  <ColorRiskGreen />
-// } else {
-// <ColorRiskBlue />
-
-// }} */
-
-// ///

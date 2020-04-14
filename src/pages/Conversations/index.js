@@ -1,118 +1,144 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+// import { View } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
 
-import { Alert } from 'react-native';
-import logo from '~/assets/logo.png';
-
-import api from '~/services/api';
-
-import Button from '~/components/Button';
+import Input from '~/components/Input';
 import {
   Container,
-  BackgroundTitle,
-  Logo,
+  TitleArea,
   Title,
-  PersonArea,
-  PersonImage,
+  DateView,
+  DateArea,
+  DateText,
   AreaInfo,
-  PersonName,
-  PersonAge,
-  PeopleBar,
-  CircleArea,
+  Card,
   IconArea,
-  BorderCircle,
-  PeopleCircle,
-  ButtonsArea,
+  DescArea,
+  HourText,
+  TimeLineCard,
+  TimeLineTitle,
+  ResultCard,
+  LineArea,
+  Line,
+  ReportArea,
+  Report,
+  LastReport,
 } from './styles';
 
 export default function Conversas(props) {
-  const profile = useSelector((state) => state.user.profile);
-
-  const [dependents, setDependents] = useState([]);
-
-  useEffect(() => {
-    async function loadDependents() {
-      const response = await api.get(`/dependent/${profile.id}`);
-
-      setDependents(response.data);
-    }
-
-    console.log(profile.image_url);
-
-    loadDependents();
-  }, []);
-
-  const goProgramsProfile = () => {
-    props.navigation.navigate('ProfilePrograms');
+  const navigateBack = () => {
+    props.navigation.goBack();
   };
 
-  const goMedicalRecord = () => {
-    props.navigation.navigate('MedicalRecord');
-  };
-
-  const goTimeLime = () => {
-    props.navigation.navigate('TimeLine');
-  };
+  const dateFormatted = useMemo(
+    () =>
+      format(new Date(), "d 'de' MMMM 'de' yyyy, iiii", {
+        locale: pt,
+      }),
+    []
+  );
 
   return (
     <Container>
-      <BackgroundTitle style={{ height: hp('9.86%') }}>
-        <Logo source={logo} />
-        <Title>Pessoas</Title>
-      </BackgroundTitle>
-      <PersonArea>
-        <PersonImage
-          style={{
-            uri: profile.image_url,
-          }}
+      <TitleArea>
+        <Icon
+          name="arrow-back"
+          size={(hp('2.82%'), wp('5%'))}
+          color="#625C70"
+          style={{ marginLeft: wp('7.5%') }}
+          onPress={navigateBack}
         />
-        <AreaInfo>
-          <PersonName>{profile.name}</PersonName>
-          <PersonAge>{profile.birth}</PersonAge>
-        </AreaInfo>
-      </PersonArea>
-      <ButtonsArea>
-        <Button onPress={goProgramsProfile}>Programas</Button>
-        <Button onPress={goMedicalRecord}>Prontuário</Button>
-        <Button onPress={goTimeLime}>Linha do tempo</Button>
-      </ButtonsArea>
-      <PeopleBar>
-        <CircleArea
-          data={dependents}
-          horizontal
-          keyExtractor={(item) => String(item)}
-          renderItem={({ item }) => (
-            <>
-              <BorderCircle>
-                <PeopleCircle
-                  onPress={() => {}}
-                  source={{ uri: item.image_url }}
-                />
-              </BorderCircle>
-            </>
-          )}
-        />
+        <Title>Linha do Tempo</Title>
+      </TitleArea>
+      <Input icon="search" placeholder="Pesquisar histórico" />
 
-        <IconArea>
-          <Icon
-            name="add-circle"
-            size={20}
-            color="#625C70"
-            style={{ marginRight: wp('5.63%'), alignItems: 'center' }}
-            onPress={() =>
-              Alert.alert(
-                'Atenção',
-                'Por favor, crie a página para adicionar dependentes'
-              )
-            }
-          />
-        </IconArea>
-      </PeopleBar>
+      <AreaInfo
+        showsVerticalScrollIndicator={false}
+        data={[1, 2]}
+        keyExtractor={(item) => String(item)}
+        renderItem={() => (
+          <>
+            <DateView>
+              <DateArea>
+                <DateText>Hoje</DateText>
+              </DateArea>
+            </DateView>
+            <Card>
+              <TimeLineCard>
+                <IconArea>
+                  <Icon
+                    name="assignment-turned-in"
+                    size={(hp('2.82%'), wp('5%'))}
+                    color="#A51C60"
+                  />
+                </IconArea>
+                <DescArea>
+                  <TimeLineTitle>Atendimento com nutricionista</TimeLineTitle>
+                  <HourText>19:21</HourText>
+                </DescArea>
+              </TimeLineCard>
+
+              <ResultCard>
+                <LineArea>
+                  <Line />
+                </LineArea>
+                <ReportArea>
+                  <Report>Paciente com dúvida em relação a alimentação</Report>
+                </ReportArea>
+              </ResultCard>
+
+              <TimeLineCard>
+                <IconArea>
+                  <Icon
+                    name="edit"
+                    size={(hp('2.82%'), wp('5%'))}
+                    color="#A51C60"
+                  />
+                </IconArea>
+                <DescArea>
+                  <TimeLineTitle>Preenchimento de questionário</TimeLineTitle>
+                  <HourText>20:30</HourText>
+                </DescArea>
+              </TimeLineCard>
+
+              <ResultCard>
+                <LineArea>
+                  <Line />
+                </LineArea>
+                <ReportArea>
+                  <Report>Questionário foi preenchido</Report>
+                </ReportArea>
+              </ResultCard>
+
+              <TimeLineCard>
+                <IconArea>
+                  <Icon
+                    name="assignment-turned-in"
+                    size={(hp('2.82%'), wp('5%'))}
+                    color="#A51C60"
+                  />
+                </IconArea>
+                <DescArea>
+                  <TimeLineTitle>Atendimento com pediatra</TimeLineTitle>
+                  <HourText>20:30</HourText>
+                </DescArea>
+              </TimeLineCard>
+
+              <ResultCard>
+                <ReportArea>
+                  <LastReport>Atendimento de rotina</LastReport>
+                </ReportArea>
+              </ResultCard>
+            </Card>
+          </>
+        )}
+      />
     </Container>
   );
 }

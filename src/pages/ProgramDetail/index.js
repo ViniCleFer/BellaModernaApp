@@ -5,9 +5,6 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
-
-import imagetitle from '~/assets/gestacao.png';
 
 import api from '~/services/api';
 
@@ -27,14 +24,14 @@ import {
 export default function ProgramDetail(props) {
   const program = props.navigation.getParam('program');
 
+  const id = props.navigation.getParam('id');
+
   const navigateBack = () => {
     props.navigation.goBack();
   };
 
-  const profile = useSelector((state) => state.user.profile);
-
   async function subscribe() {
-    await api.post(`/program/${program._id}/${profile.id}`);
+    await api.post(`/program/${program._id}/${id}`);
 
     Alert.alert('Inscrição concluída com sucesso');
 
@@ -43,7 +40,9 @@ export default function ProgramDetail(props) {
 
   return (
     <Container showsVerticalScrollIndicator={false}>
-      <TitleArea source={imagetitle}>
+      <TitleArea
+        source={{ uri: `http://192.168.0.13:3333/files/${program.image_url}` }}
+      >
         <Icon
           name="arrow-back"
           size={(hp('2.82%'), wp('5%'))}

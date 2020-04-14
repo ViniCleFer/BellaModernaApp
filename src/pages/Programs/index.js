@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { View } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -18,6 +17,8 @@ import {
 } from './styles';
 
 export default function Programs(props) {
+  const id = props.navigation.getParam('id');
+
   const [programs, setPrograms] = useState([]);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function Programs(props) {
             <NavButton
               underlayColor="#f2f1f3"
               onPress={() =>
-                props.navigation.navigate('ProgramDetail', { program })
+                props.navigation.navigate('ProgramDetail', { program, id })
               }
             >
               <TextNavButton>{program.name}</TextNavButton>
@@ -66,22 +67,3 @@ export default function Programs(props) {
     </Container>
   );
 }
-
-/*
-
-CASO QUEIRA ADICIONAR MAIS ITENS TORNANDO FLATLIST
-
-<AreaInfo
-  showsVerticalScrollIndicator={false}
-  data={[1, 2, 3, 4, 5]}
-  keyExtractor={(item) => String(item)}
-  renderItem={() => (
-    <>
-      <NavButton activeOpacity={0.8} onPress={() => {}}>
-        <TextNavButton>Gestação</TextNavButton>
-      </NavButton>
-    </>
-  )}
-/>
-
-*/

@@ -102,8 +102,6 @@ export const BodyCard = styled.View`
   background-color: #fff;
   padding-left: ${wp('5%')};
   padding-right: ${wp('5%')};
-  padding-top: ${hp('0.36%')};
-  padding-bottom: ${hp('3.17%')};
 `;
 
 export const BodyTitle = styled.Text`
@@ -129,6 +127,7 @@ export const BodyText = styled.Text`
 `;
 export const InfoRisk = styled.View`
   flex-direction: row;
+  padding-bottom: ${hp('2.82%')};
 `;
 
 export const ColorRisk = styled.Text`
@@ -147,6 +146,7 @@ export const BottomCard = styled.View`
   justify-content: center;
   padding-left: ${wp('5%')};
 `;
+
 export const CallType = styled.Text`
   font-size: ${hp('1.76%')};
   font-weight: bold;
