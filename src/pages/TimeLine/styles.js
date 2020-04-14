@@ -28,14 +28,15 @@ export const Title = styled.Text`
 export const DateView = styled.View`
   align-items: center;
   justify-content: center;
+  padding-top: ${hp('2.11%')};
 `;
 
 export const DateArea = styled.View`
   height: ${hp('4.23%')};
   width: ${wp('26.25%')};
+
   background-color: #958fa3;
   border-radius: 50;
-  margin-top: ${hp('2.11%')};
   align-items: center;
   justify-content: center;
 `;
@@ -53,7 +54,6 @@ export const AreaInfo = styled.FlatList`
   background-color: #e5e5e5;
   flex: 1;
   padding-bottom: ${hp('2.11%')};
-  padding-top: ${hp('2.11%')};
 `;
 
 export const Card = styled.View`
@@ -95,6 +95,7 @@ export const HourText = styled.Text`
 
 export const ResultCard = styled.View`
   flex-direction: row;
+  padding-bottom: ${hp('2.11%')};
 `;
 
 export const LineArea = styled.View`

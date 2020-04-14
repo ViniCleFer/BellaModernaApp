@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-// import { View } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
+
+import api from '~/services/api';
 
 import Input from '~/components/Input';
 import {
@@ -32,13 +34,27 @@ import {
 } from './styles';
 
 export default function Conversas(props) {
+  const id = props.navigation.getParam('id');
+
+  const [timeline, setTimeLine] = useState([]);
+
   const navigateBack = () => {
     props.navigation.goBack();
   };
 
+  useEffect(() => {
+    async function loadTimeLine() {
+      const response = await api.get(`/timeline/${id}`);
+
+      setTimeLine(response.data);
+    }
+
+    loadTimeLine();
+  }, []);
+
   const dateFormatted = useMemo(
     () =>
-      format(new Date(), "d 'de' MMMM 'de' yyyy, iiii", {
+      format(new Date(), 'd/MM/yyyy', {
         locale: pt,
       }),
     []
@@ -56,17 +72,18 @@ export default function Conversas(props) {
         />
         <Title>Linha do Tempo</Title>
       </TitleArea>
+
       <Input icon="search" placeholder="Pesquisar histórico" />
 
       <AreaInfo
         showsVerticalScrollIndicator={false}
-        data={[1, 2]}
+        data={timeline}
         keyExtractor={(item) => String(item)}
-        renderItem={() => (
+        renderItem={({ item }) => (
           <>
             <DateView>
               <DateArea>
-                <DateText>Hoje</DateText>
+                <DateText>{dateFormatted}</DateText>
               </DateArea>
             </DateView>
             <Card>
@@ -79,8 +96,8 @@ export default function Conversas(props) {
                   />
                 </IconArea>
                 <DescArea>
-                  <TimeLineTitle>Atendimento com nutricionista</TimeLineTitle>
-                  <HourText>19:21</HourText>
+                  <TimeLineTitle>{item.action[0]}</TimeLineTitle>
+                  <HourText>{item.hour[0]}</HourText>
                 </DescArea>
               </TimeLineCard>
 
@@ -89,7 +106,7 @@ export default function Conversas(props) {
                   <Line />
                 </LineArea>
                 <ReportArea>
-                  <Report>Paciente com dúvida em relação a alimentação</Report>
+                  <Report>{item.info[0]}</Report>
                 </ReportArea>
               </ResultCard>
 
@@ -102,8 +119,8 @@ export default function Conversas(props) {
                   />
                 </IconArea>
                 <DescArea>
-                  <TimeLineTitle>Preenchimento de questionário</TimeLineTitle>
-                  <HourText>20:30</HourText>
+                  <TimeLineTitle>{item.action[1]}</TimeLineTitle>
+                  <HourText>{item.hour[1]}</HourText>
                 </DescArea>
               </TimeLineCard>
 
@@ -112,7 +129,7 @@ export default function Conversas(props) {
                   <Line />
                 </LineArea>
                 <ReportArea>
-                  <Report>Questionário foi preenchido</Report>
+                  <Report>{item.info[1]}</Report>
                 </ReportArea>
               </ResultCard>
 
@@ -125,14 +142,14 @@ export default function Conversas(props) {
                   />
                 </IconArea>
                 <DescArea>
-                  <TimeLineTitle>Atendimento com pediatra</TimeLineTitle>
-                  <HourText>20:30</HourText>
+                  <TimeLineTitle>{item.action[2]}</TimeLineTitle>
+                  <HourText>{item.hour[2]}</HourText>
                 </DescArea>
               </TimeLineCard>
 
               <ResultCard>
                 <ReportArea>
-                  <LastReport>Atendimento de rotina</LastReport>
+                  <LastReport>{item.info[2]}</LastReport>
                 </ReportArea>
               </ResultCard>
             </Card>
