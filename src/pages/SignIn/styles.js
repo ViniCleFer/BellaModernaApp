@@ -1,13 +1,8 @@
-import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
-import Input from '~/components/Input';
 import Button from './components/Button';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  enabled: Platform.OS === 'ios',
-  behavior: 'padding',
-})`
+export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -19,20 +14,8 @@ export const Form = styled.View`
   margin-top: 150px;
 `;
 
-export const FormInput = styled(Input)`
-  margin-bottom: 30px;
-`;
-
 export const SubmitButton = styled(Button)`
-  margin-top: 5px;
-`;
-
-export const SignLink = styled.TouchableOpacity`
-  margin-top: 20px;
-`;
-
-export const SignLinkText = styled.Text`
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
+  margin-top: 30px;
+  padding-left: 20;
+  padding-right: 20;
 `;

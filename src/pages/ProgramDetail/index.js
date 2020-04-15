@@ -41,7 +41,7 @@ export default function ProgramDetail(props) {
   return (
     <Container showsVerticalScrollIndicator={false}>
       <TitleArea
-        source={{ uri: `http://192.168.0.13:3333/files/${program.image_url}` }}
+        source={{ uri: `http://localhost:3333/files/${program.image_url}` }}
       >
         <Icon
           name="arrow-back"

@@ -38,7 +38,6 @@ const TabStack = createBottomTabNavigator(
     },
 
     defaultNavigationOptions: ({ navigation }) => ({
-      // eslint-disable-next-line react/prop-types
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         const IconComponent = Icon;

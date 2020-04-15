@@ -32,7 +32,7 @@ import {
   LastReport,
 } from './styles';
 
-export default function Conversas(props) {
+export default function TimeLine(props) {
   const id = props.navigation.getParam('id');
 
   const [timeline, setTimeLine] = useState([]);

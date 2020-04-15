@@ -9,7 +9,7 @@ import logo from '~/assets/logo.png';
 import Background from './components/Background';
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import { Container, Form, FormInput, SubmitButton } from './styles';
+import { Container, SubmitButton } from './styles';
 
 export default function SignIn({ navigation }) {
   const dispatch = useDispatch();
@@ -26,23 +26,9 @@ export default function SignIn({ navigation }) {
     <Background>
       <Container>
         <Image source={logo} />
-
-        <Form>
-          <FormInput
-            icon="mail-outline"
-            keyboardType="email-address"
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholder="Digite seu email"
-            returnKeyType="send"
-            value={email}
-            onChangeText={email}
-          />
-
-          <SubmitButton loading={loading} onPress={handleSubmit}>
-            Acessar
-          </SubmitButton>
-        </Form>
+        <SubmitButton loading={loading} onPress={handleSubmit}>
+          Acessar
+        </SubmitButton>
       </Container>
     </Background>
   );

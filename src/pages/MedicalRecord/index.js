@@ -46,7 +46,7 @@ export default function MedicalRecord(props) {
   const id = props.navigation.getParam('id');
 
   const [medRecords, setMedRecord] = useState([]);
-  const [activeIcon, setActiveIcon] = useState('more');
+  const [activeIcon, setActiveIcon] = useState(false);
 
   const navigateBack = () => {
     props.navigation.goBack();
@@ -94,12 +94,14 @@ export default function MedicalRecord(props) {
               <DateText>{dateFormatted}</DateText>
             </DateArea>
             <Card>
-              <Collapse>
+              <Collapse
+                onToggle={(activeIcon) => setActiveIcon(activeIcon === true)}
+              >
                 <CollapseHeader>
                   <TopCard>
                     <DoctorImage
                       source={{
-                        uri: `http://192.168.0.13:3333/files/${item.image_url}`,
+                        uri: `http://localhost:3333/files/${item.image_url}`,
                       }}
                     />
                     <AreaDoctorInfo>
@@ -107,28 +109,31 @@ export default function MedicalRecord(props) {
                       <DoctorSpecialty>{item.especiality}</DoctorSpecialty>
                     </AreaDoctorInfo>
 
-                    <IconArea onPress={() => setActiveIcon('less')}>
-                      <Icon
-                        name={activeIcon}
-                        size={(wp('3.75%'), hp('2.32%'))}
-                        color="#625C70"
-                        style={{
-                          marginRight: wp('6.88%'),
-                          alignItems: 'center',
-                        }}
-                      />
-                    </IconArea>
-                    <IconArea onPress={() => setActiveIcon('less')}>
-                      <Icon
-                        name="expand-less"
-                        size={(wp('3.75%'), hp('2.32%'))}
-                        color="#625C70"
-                        style={{
-                          marginRight: wp('6.88%'),
-                          alignItems: 'center',
-                        }}
-                      />
-                    </IconArea>
+                    {activeIcon ? (
+                      <IconArea>
+                        <Icon
+                          name="expand-less"
+                          size={(wp('3.75%'), hp('2.32%'))}
+                          color="#625C70"
+                          style={{
+                            marginRight: wp('6.88%'),
+                            alignItems: 'center',
+                          }}
+                        />
+                      </IconArea>
+                    ) : (
+                      <IconArea>
+                        <Icon
+                          name="expand-more"
+                          size={(wp('3.75%'), hp('2.32%'))}
+                          color="#625C70"
+                          style={{
+                            marginRight: wp('6.88%'),
+                            alignItems: 'center',
+                          }}
+                        />
+                      </IconArea>
+                    )}
                   </TopCard>
 
                   <Separator />

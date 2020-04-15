@@ -9,7 +9,12 @@ export default (signedIn = false) =>
     createSwitchNavigator(
       {
         Sign: createStackNavigator({
-          Login,
+          Login: {
+            screen: Login,
+            navigationOptions: {
+              header: null,
+            },
+          },
         }),
         App: createStackNavigator({
           TabStack: {
