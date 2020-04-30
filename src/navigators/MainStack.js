@@ -1,7 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import TabStack from '~/TabStack';
+import TabStack from '~/navigators/TabStack';
 import Login from '~/pages/SignIn';
 
 export default (signedIn = false) =>

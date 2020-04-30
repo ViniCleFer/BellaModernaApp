@@ -23,7 +23,7 @@ import {
   TextNavButton,
 } from './styles';
 
-export default function More(props) {
+export default function Account(props) {
   const profile = useSelector((state) => state.user.profile);
   const navigateBack = () => {
     props.navigation.goBack();

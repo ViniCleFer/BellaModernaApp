@@ -5,14 +5,20 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Conversas from '~/pages/Conversations';
-import Profissionais from '~/pages/Professionals';
-import StackPersons from '~/pages/StackPersons';
-import Mais from '~/pages/More';
+import Records from '~/pages/Records';
+import StackPersons from '~/navigators/StackPersons';
+import SwitchMore from '~/navigators/SwitchMore';
 
 const TabStack = createBottomTabNavigator(
   {
     Conversas,
-    Profissionais,
+    Records: {
+      screen: Records,
+      navigationOptions: {
+        header: null,
+        title: 'Prontuarios',
+      },
+    },
     StackPersons: {
       screen: StackPersons,
       navigationOptions: {
@@ -20,7 +26,13 @@ const TabStack = createBottomTabNavigator(
         title: 'Pessoas',
       },
     },
-    Mais,
+    SwitchMore: {
+      screen: SwitchMore,
+      navigationOptions: {
+        header: null,
+        title: 'Mais',
+      },
+    },
   },
   {
     tabBarOptions: {
@@ -44,9 +56,9 @@ const TabStack = createBottomTabNavigator(
         let iconName;
 
         if (routeName === 'Conversas') iconName = 'comments';
-        else if (routeName === 'Profissionais') iconName = 'user-md';
+        else if (routeName === 'Records') iconName = 'user-md';
         else if (routeName === 'StackPersons') iconName = 'users';
-        else if (routeName === 'Mais') iconName = 'ellipsis-h';
+        else if (routeName === 'SwitchMore') iconName = 'ellipsis-h';
 
         return (
           <IconComponent

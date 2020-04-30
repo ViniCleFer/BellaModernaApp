@@ -101,7 +101,7 @@ export default function MedicalRecord(props) {
                   <TopCard>
                     <DoctorImage
                       source={{
-                        uri: `http://localhost:3333/files/${item.image_url}`,
+                        uri: `http://192.168.0.13:3333/files/${item.image_url}`,
                       }}
                     />
                     <AreaDoctorInfo>

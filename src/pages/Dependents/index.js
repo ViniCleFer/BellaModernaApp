@@ -83,7 +83,7 @@ export default function Dependents(props) {
         <PersonImage
           style={{ heigh: 50, width: 50 }}
           source={{
-            uri: `http://localhost:3333/files/${dependent.image_url}`,
+            uri: `http://192.168.0.13:3333/files/${dependent.image_url}`,
           }}
         />
         <AreaInfo>
@@ -102,7 +102,7 @@ export default function Dependents(props) {
             <PeopleCircle
               onPress={() => props.navigation.navigate('StackPersons')}
               source={{
-                uri: `http://localhost:3333/files/${profile.image_url}`,
+                uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
               }}
             />
           </BorderCircle>
@@ -120,7 +120,7 @@ export default function Dependents(props) {
                       props.navigation.navigate('Dependents', { item })
                     }
                     source={{
-                      uri: `http://localhost:3333/files/${item.image_url}`,
+                      uri: `http://192.168.0.13:3333/files/${item.image_url}`,
                     }}
                   />
                 </BorderCircle>

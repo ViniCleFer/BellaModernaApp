@@ -82,7 +82,7 @@ export default function Pessoas(props) {
         <PersonImage
           style={{ heigh: 50, width: 50 }}
           source={{
-            uri: `http://localhost:3333/files/${profile.image_url}`,
+            uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
           }}
         />
         <AreaInfo>
@@ -103,7 +103,7 @@ export default function Pessoas(props) {
                 props.navigation.navigate('StackPersons', { profile })
               }
               source={{
-                uri: `http://localhost:3333/files/${profile.image_url}`,
+                uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
               }}
             />
           </BorderCircle>
@@ -123,7 +123,7 @@ export default function Pessoas(props) {
                 <BorderCircle>
                   <PeopleCircle
                     source={{
-                      uri: `http://localhost:3333/files/${item.image_url}`,
+                      uri: `http://192.168.0.13:3333/files/${item.image_url}`,
                     }}
                   />
                 </BorderCircle>
