@@ -17,7 +17,7 @@ import {
 
 export default function Account(props) {
   const navigateBack = () => {
-    props.navigation.goBack();
+    props.navigation.navigate('StackAccount');
   };
 
   return (
@@ -33,7 +33,10 @@ export default function Account(props) {
         <Title>Mais Opções</Title>
       </TitleArea>
       <AreaInfo>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
+        <NavButton
+          underlayColor="#f2f1f3"
+          onPress={() => props.navigation.navigate('StackPersonalData')}
+        >
           <AreaButton>
             <Icon
               name="clipboard-outline"

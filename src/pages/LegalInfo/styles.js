@@ -38,10 +38,6 @@ export const NavButton = styled.TouchableHighlight`
   justify-content: center;
 `;
 
-export const AreaButton = styled.View`
-  flex-direction: row;
-`;
-
 export const TextNavButton = styled.Text`
   font-size: ${hp('2.82%')};
   color: #625c70;

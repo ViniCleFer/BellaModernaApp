@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
 // import { Container } from './styles';
 
 export default function PersonalData() {
-  return <View />;
+  return <Text>Dados pessoais</Text>;
 }

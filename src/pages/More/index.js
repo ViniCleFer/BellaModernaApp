@@ -84,7 +84,10 @@ export default function More(props) {
             <TextNavButton>Programas</TextNavButton>
           </AreaButton>
         </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
+        <NavButton
+          underlayColor="#f2f1f3"
+          onPress={() => props.navigation.navigate('StackAccount')}
+        >
           <AreaButton>
             <Icon
               name="account-circle"
@@ -96,7 +99,10 @@ export default function More(props) {
             <TextNavButton>Conta</TextNavButton>
           </AreaButton>
         </NavButton>
-        <NavButton underlayColor="#f2f1f3" onPress={() => {}}>
+        <NavButton
+          underlayColor="#f2f1f3"
+          onPress={() => props.navigation.navigate('LegalInfo')}
+        >
           <AreaButton>
             <Icon
               name="information-outline"

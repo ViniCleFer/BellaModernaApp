@@ -1,4 +1,4 @@
-import { createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import More from '~/pages/More';
 import Questionnaires from '~/pages/Questionnaires';
@@ -10,7 +10,7 @@ import PersonalData from '~/pages/PersonalData';
 import PlanDetails from '~/pages/PlanDetails';
 import Payment from '~/pages/Payment';
 
-const SwitchMore = createSwitchNavigator({
+const SwitchMore = createStackNavigator({
   More: {
     screen: More,
     navigationOptions: {

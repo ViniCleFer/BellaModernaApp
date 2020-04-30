@@ -1,11 +1,11 @@
-import { createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import Account from '~/pages/Account';
 import PersonalData from '~/pages/PersonalData';
 import PlanDetails from '~/pages/PlanDetails';
 import Payment from '~/pages/Payment';
 
-const StackAccount = createSwitchNavigator({
+const StackAccount = createStackNavigator({
   Account: {
     screen: Account,
     navigationOptions: {

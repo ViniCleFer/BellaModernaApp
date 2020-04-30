@@ -28,24 +28,25 @@ export const Title = styled.Text`
   margin-left: ${wp('7.5%')};
 `;
 
-export const AreaInfo = styled.View`
+export const AreaInfo = styled.ScrollView`
   background-color: #fff;
+  padding-right: ${wp('7.5%')};
+  padding-left: ${wp('7.5%')};
 `;
 
-export const NavButton = styled.TouchableHighlight`
-  background-color: #fff;
-  height: ${hp('8.98%')};
-  justify-content: center;
+export const DescriptionTitle = styled.Text`
+  font-size: ${hp('4.23%')};
+  color: #312e38;
+  font-weight: normal;
+  align-items: center;
+  margin-top: ${hp('2.82%')};
+  margin-bottom: ${hp('2.82%')};
 `;
 
-export const AreaButton = styled.View`
-  flex-direction: row;
-`;
-
-export const TextNavButton = styled.Text`
+export const DescriptionText = styled.Text`
   font-size: ${hp('2.82%')};
   color: #625c70;
   font-weight: normal;
   align-items: center;
-  margin-left: ${wp('8.44%')};
+  margin-bottom: ${hp('3.17%')};
 `;
