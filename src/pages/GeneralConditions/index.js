@@ -32,30 +32,24 @@ export default function GeneralConditions(props) {
         <Title>Informações Legais</Title>
       </TitleArea>
       <AreaInfo showsVerticalScrollIndicator={false}>
-        <DescriptionTitle>Termos de uso do serviço</DescriptionTitle>
+        <DescriptionTitle>Condições Gerais</DescriptionTitle>
 
         <DescriptionText>
-          Bellamaterna é um aplicativo que conecta gestantes e mães de bebes até
-          os 2 anos completos de idade a uma rede nacional de profissionais de
-          saúde, para consultoria de enfermagem, amamentação e nutrição.
+          Ao aceitar as condições descritas neste termo, você estará aderindo ao
+          contrato de uso da plataforma Bellamaterna, que rege as condições,
+          regras e responsabilidade de uso em todas as suas funcionalidades e
+          publicações de conteúdo.
         </DescriptionText>
         <DescriptionText>
-          A aplicação móvel é fornecida e gerida pela Bellamaterna
-          Desenvolvimento ltda – me, e seus serviços e conteúdos serão
-          disponibilizados através de contratação da plataforma diretamente pela
-          usuária final, ou através de licenças de uso fornecidas por
-          seguradoras e operadoras de saúde, empresas ou quaisquer entidades
-          públicas ou privadas que contratar os serviços do Bellamaterna, a fim
-          de repassa-los aos seus usuários, colaboradores, parceiros ou
-          clientes. A interação e uso dos benefícios do aplicativo Bellamaterna
-          pelos profissionais de saúde cadastrados depende diretamente da
-          leitura e concordância dos termos e políticas de uso descritos neste
-          documento.
+          Futuras alterações deste termo, podem a qualquer momento serem
+          publicadas em nossa plataforma, e será solicitada a renovação de
+          aceite do termo, afim de permitir o uso da aplicação dentro das
+          condições estipuladas.
         </DescriptionText>
         <DescriptionText>
-          A interação e uso dos benefícios do aplicativo Bellamaterna pelos
-          profissionais de saúde cadastrados depende diretamente da leitura e
-          concordância dos termos e políticas de uso descritos neste documento.
+          Nos comprometemos a manter sempre a última versão do termo publicada
+          em nosso site, com acesso irrestrito a qualquer pessoa independente de
+          ser usuário de nossa plataforma.
         </DescriptionText>
       </AreaInfo>
     </Container>

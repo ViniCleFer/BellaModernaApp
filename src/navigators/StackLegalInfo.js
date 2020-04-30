@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import LegalInfo from '~/pages/LegalInfo';
 import UseTerms from '~/pages/UseTerms';
 import GeneralConditions from '~/pages/GeneralConditions';
-import BellaManterna from '~/pages/BellaMaterna';
+import BellaMaterna from '~/pages/BellaMaterna';
 import UseDeclaration from '~/pages/UseDeclaration';
 import Security from '~/pages/Security';
 import Signature from '~/pages/Signature';
@@ -31,11 +31,11 @@ const StackLegalInfo = createStackNavigator({
       title: 'GeneralConditions',
     },
   },
-  BellaManterna: {
-    screen: BellaManterna,
+  BellaMaterna: {
+    screen: BellaMaterna,
     navigationOptions: {
       header: null,
-      title: 'BellaManterna',
+      title: 'BellaMaterna',
     },
   },
   UseDeclaration: {
