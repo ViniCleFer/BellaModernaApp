@@ -37,7 +37,7 @@ export default function Name(props) {
 
       <AreaInfo>
         <SubTitle>Nome</SubTitle>
-        <InputArea autoCorrect={false} />
+        <InputArea autoCorrect={false} placeholder="Digite seu nome" />
       </AreaInfo>
       <AreaSubmitButton>
         <SubmitButton

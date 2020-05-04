@@ -42,13 +42,11 @@ export const SubTitle = styled.Text`
   align-items: center;
 `;
 
-export const InputArea = styled.TextInput.attrs({
-  placeholderTextColor: '#625C70',
-})`
+export const InputArea = styled.TextInput`
   font-size: ${hp('2.82%')};
   height: ${hp('6.34%')};
   align-self: stretch;
-  color: #625c70;
+  color: #312e38;
   font-weight: normal;
   padding-left: ${wp('3.75%')};
   margin-top: ${hp('0.53%')};
