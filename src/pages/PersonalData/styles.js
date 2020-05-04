@@ -31,11 +31,19 @@ export const Title = styled.Text`
 export const ProfileArea = styled.View`
   justify-content: center;
   align-items: center;
-  width: 100%;
+`;
+
+export const ProfileIconArea = styled.View`
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50;
+  height: ${hp('2.64%')};
+  width: ${wp('4.69%')};
+  margin-top: ${hp('-1.06%')};
 `;
 
 export const ProfilePhoto = styled.Image`
-  background-color: #0ff;
   height: ${hp('17.61%')};
   width: ${wp('31.25%')};
   border-radius: 60;
@@ -48,9 +56,8 @@ export const LinkPhoto = styled.TouchableHighlight`
   background-color: #fff;
   height: ${hp('2.99%')};
   justify-content: center;
-
   background: transparent;
-  margin-top: ${hp('0.70%')};
+  margin-top: ${hp('-0.70%')};
   margin-bottom: ${hp('0;70%')};
 `;
 

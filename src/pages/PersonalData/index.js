@@ -14,6 +14,7 @@ import {
   Title,
   ProfileArea,
   ProfilePhoto,
+  ProfileIconArea,
   LinkPhoto,
   LinkTextPhoto,
   SubtitleArea,
@@ -46,7 +47,7 @@ export default function PersonalData(props) {
   );
 
   return (
-    <Container>
+    <Container showsVerticalScrollIndicator={false}>
       <TitleArea>
         <Icon
           name="arrow-back"
@@ -63,8 +64,16 @@ export default function PersonalData(props) {
             uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
           }}
         />
-
-        <LinkPhoto onPress={() => {}}>
+        <ProfileIconArea>
+          <Icon
+            name="camera-alt"
+            size={12}
+            color="#625C70"
+            style={{ position: 'absolute' }}
+            onPress={navigateBack}
+          />
+        </ProfileIconArea>
+        <LinkPhoto underlayColor="#fff" onPress={() => {}}>
           <LinkTextPhoto>Alterar foto</LinkTextPhoto>
         </LinkPhoto>
       </ProfileArea>
@@ -112,7 +121,7 @@ export default function PersonalData(props) {
         </NavButton>
         <NavButton
           underlayColor="#f2f1f3"
-          onPress={() => props.navigation.navigate('Email')}
+          onPress={() => props.navigation.navigate('SocialRecord')}
         >
           <ButtonNavArea>
             <ButtonArea>
@@ -131,7 +140,7 @@ export default function PersonalData(props) {
         </NavButton>
         <NavButton
           underlayColor="#f2f1f3"
-          onPress={() => props.navigation.navigate('SocialRecord')}
+          onPress={() => props.navigation.navigate('BirthDate')}
         >
           <ButtonNavArea>
             <ButtonArea>
@@ -150,7 +159,7 @@ export default function PersonalData(props) {
         </NavButton>
         <NavButtonAddress
           underlayColor="#f2f1f3"
-          onPress={() => props.navigation.navigate('Adderss')}
+          onPress={() => props.navigation.navigate('Address')}
         >
           <ButtonNavArea>
             <ButtonArea>
