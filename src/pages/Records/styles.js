@@ -282,6 +282,120 @@ export const ConclusionText = styled.Text`
   font-weight: normal;
 `;
 
+export const RiskArea = styled.View``;
+
+export const RiskButton = styled.TouchableOpacity`
+  flex-direction: row;
+  font-size: ${hp('2.82%')};
+  height: ${hp('6.34%')};
+  align-self: stretch;
+  color: #312e38;
+  font-weight: normal;
+  margin-top: ${hp('0.53%')};
+  align-items: center;
+  border: 1px solid #958fa3;
+  border-radius: 4px;
+`;
+
+export const RiskSelected = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const RiskColorSelected = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-left: ${wp('3.75%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #fa375a;
+`;
+
+export const RiskTextSelected = styled.Text`
+  font-size: ${hp('2.82%')};
+  line-height: ${hp('4.23%')};
+  color: #625c70;
+  font-weight: normal;
+`;
+
+export const Risk = styled.Modal``;
+
+export const RiskContainerItens = styled.View`
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+`;
+
+export const RiskItens = styled.View`
+  background-color: #fff;
+  width: 300px;
+  padding-top: ${hp('1.08%')};
+  padding-bottom: ${hp('3.52%')};
+  padding-left: ${wp('6.25%')};
+  padding-right: ${wp('6.25%')};
+  border-radius: 4;
+`;
+
+export const RiskButtonItem = styled.TouchableOpacity`
+  flex-direction: row;
+  padding-right: ${wp('6.25%')};
+  align-items: center;
+`;
+
+export const RiskAreaItens = styled.View`
+  flex-direction: row;
+  padding-right: ${wp('6.25%')};
+  margin-top: ${hp('2.46%')};
+  align-items: center;
+`;
+
+export const RiskColorRed = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #fa375a;
+`;
+
+export const RiskColorOrange = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #ff891c;
+`;
+
+export const RiskColorYellow = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #fff500;
+`;
+export const RiskColorGreen = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #25d366;
+`;
+export const RiskColorBlue = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #2f80ed;
+`;
+
+export const RiskText = styled.Text`
+  font-size: ${hp('2.82%')};
+  line-height: ${hp('4.23%')};
+  color: #625c70;
+  font-weight: normal;
+`;
+
 export const AreaSubmitButton = styled.View`
   justify-content: center;
   align-items: center;

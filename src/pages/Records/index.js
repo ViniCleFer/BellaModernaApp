@@ -6,6 +6,7 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
 
 import {
   Container,
@@ -42,6 +43,22 @@ import {
   ConclusionsAreaItens,
   ConclusionTextArea,
   ConclusionText,
+  RiskArea,
+  RiskButton,
+  RiskSelected,
+  RiskColorSelected,
+  RiskTextSelected,
+  Risk,
+  RiskContainerItens,
+  RiskItens,
+  RiskButtonItem,
+  RiskAreaItens,
+  RiskColorRed,
+  RiskColorOrange,
+  RiskColorYellow,
+  RiskColorGreen,
+  RiskColorBlue,
+  RiskText,
   AreaSubmitButton,
   SubmitButton,
   TextSubmitButton,
@@ -51,6 +68,8 @@ export default function Records(props) {
   const navigateBack = () => {
     props.navigation.navigate('PersonalData');
   };
+
+  const profile = useSelector((state) => state.user.profile);
 
   const [selectedValue, setSelectedValue] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -91,11 +110,10 @@ export default function Records(props) {
         <ButtonArea activeOpacity={0.6} onPress={() => {}}>
           <DoctorImage
             source={{
-              uri: ``,
+              uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
             }}
-            style={{ backgroundColor: 'blue' }}
           />
-          <DoctorName>Alissan Camargo</DoctorName>
+          <DoctorName>{profile.name}</DoctorName>
 
           <IconArea>
             <Icon
@@ -327,41 +345,39 @@ export default function Records(props) {
           >
             <ConclusionsAreaItens>
               <ConclusionItens style={{ paddingTop: hp('-2.46%') }}>
-                <ConclusionTextArea>
+                <ConclusionTextArea
+                  onPress={() => setModalConclusionVisible(false)}
+                >
                   <ConclusionText>Interação concluída</ConclusionText>
                 </ConclusionTextArea>
-                <ConclusionTextArea>
+                <ConclusionTextArea
+                  onPress={() => setModalConclusionVisible(false)}
+                >
                   <ConclusionText>
                     Orientada a retornar para reavaliação
                   </ConclusionText>
                 </ConclusionTextArea>
-                <ConclusionTextArea>
+                <ConclusionTextArea
+                  onPress={() => setModalConclusionVisible(false)}
+                >
                   <ConclusionText>
                     Orientada a realizar uma interação com outro profissional
                   </ConclusionText>
                 </ConclusionTextArea>
-                <ConclusionTextArea>
+                <ConclusionTextArea
+                  onPress={() => setModalConclusionVisible(false)}
+                >
                   <ConclusionText>
                     Orientada a procurar uma avaliação médica nas próximas 24h
                   </ConclusionText>
                 </ConclusionTextArea>
-                <ConclusionTextArea>
+                <ConclusionTextArea
+                  onPress={() => setModalConclusionVisible(false)}
+                >
                   <ConclusionText>
                     Orientada a procurar um pronto atendimento
                   </ConclusionText>
                 </ConclusionTextArea>
-
-                <SubmitButton
-                  onPress={() => setModalConclusionVisible(false)}
-                  activeOpacity={0.7}
-                  style={{
-                    borderRadius: 50,
-                    borderColor: 'transparent',
-                    marginTop: hp('2.46%'),
-                  }}
-                >
-                  <TextSubmitButton>Ok</TextSubmitButton>
-                </SubmitButton>
               </ConclusionItens>
             </ConclusionsAreaItens>
           </Conclusions>
@@ -373,9 +389,13 @@ export default function Records(props) {
         </BecauseArea>
 
         <SubTitle>Classificação de risco</SubTitle>
-        <ProblemsArea>
-          <ProblemButton activeOpacity={0.6} onPress={handleRisk}>
-            <ItensSelected>{count} selecionados</ItensSelected>
+        <RiskArea>
+          <RiskButton activeOpacity={0.6} onPress={handleRisk}>
+            <RiskSelected>
+              <RiskColorSelected />
+              <RiskTextSelected>Vermelho</RiskTextSelected>
+            </RiskSelected>
+
             <IconArea>
               <Icon
                 name="arrow-drop-down"
@@ -387,51 +407,49 @@ export default function Records(props) {
                 }}
               />
             </IconArea>
-          </ProblemButton>
-          <Problems
+          </RiskButton>
+          <Risk
             visible={modalRiskVisible}
             animationType="fade"
             transparent
             onRequestClose={() => setModalRiskVisible(false)}
           >
-            <ProblemsAreaItens>
-              <ProblemsItens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Vermelho</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Laranja</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Amarelo</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Verde</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Azul</ProblemsItensText>
-                </Itens>
-
-                <SubmitButton
-                  onPress={handleRisk}
-                  activeOpacity={0.7}
-                  style={{
-                    borderRadius: 50,
-                    borderColor: 'transparent',
-                    marginTop: hp('2.46%'),
-                  }}
-                >
-                  <TextSubmitButton>Ok</TextSubmitButton>
-                </SubmitButton>
-              </ProblemsItens>
-            </ProblemsAreaItens>
-          </Problems>
-        </ProblemsArea>
+            <RiskContainerItens>
+              <RiskItens>
+                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                  <RiskAreaItens>
+                    <RiskColorRed />
+                    <RiskText>Vermelho</RiskText>
+                  </RiskAreaItens>
+                </RiskButtonItem>
+                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                  <RiskAreaItens>
+                    <RiskColorOrange />
+                    <RiskText>Laranja</RiskText>
+                  </RiskAreaItens>
+                </RiskButtonItem>
+                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                  <RiskAreaItens>
+                    <RiskColorYellow />
+                    <RiskText>Amarelo</RiskText>
+                  </RiskAreaItens>
+                </RiskButtonItem>
+                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                  <RiskAreaItens>
+                    <RiskColorGreen />
+                    <RiskText>Verde</RiskText>
+                  </RiskAreaItens>
+                </RiskButtonItem>
+                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                  <RiskAreaItens>
+                    <RiskColorBlue />
+                    <RiskText>Azul</RiskText>
+                  </RiskAreaItens>
+                </RiskButtonItem>
+              </RiskItens>
+            </RiskContainerItens>
+          </Risk>
+        </RiskArea>
       </AreaInfo>
 
       <AreaSubmitButton>
