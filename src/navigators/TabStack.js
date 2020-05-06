@@ -16,7 +16,7 @@ const TabStack = createBottomTabNavigator(
       screen: Records,
       navigationOptions: {
         header: null,
-        title: 'Prontuarios',
+        title: 'Prontuários',
       },
     },
     StackPersons: {

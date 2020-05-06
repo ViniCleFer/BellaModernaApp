@@ -53,7 +53,7 @@ export default function More(props) {
           <PersonEmail>vinicius@gmail.com</PersonEmail>
           <PerfilArea
             underlayColor="#f2f1f3"
-            onPress={() => props.navigation.navigate('StackAccount')}
+            onPress={() => props.navigation.navigate('StackPersonalData')}
           >
             <PersonPerfil>Editar perfil</PersonPerfil>
           </PerfilArea>

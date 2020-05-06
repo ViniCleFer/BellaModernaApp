@@ -17,7 +17,7 @@ import {
 
 export default function Account(props) {
   const navigateBack = () => {
-    props.navigation.navigate('StackAccount');
+    props.navigation.navigate('More');
   };
 
   return (
