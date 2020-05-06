@@ -6033,6 +6033,13 @@ react-native-screens@^2.4.0:
   dependencies:
     debounce "^1.2.0"
 
+react-native-select-multiple@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-select-multiple/-/react-native-select-multiple-2.1.0.tgz#1cc9b3c2a694d85ab5861d035f2252c20b943a08"
+  integrity sha512-sJepp/RNeLorR+/bEUVuWnVEX5klpyf0MHWKy0SN1MIty4vcKhL9ZhPM6Zydm5p6qHeFcvA7Q87FzO1JTdaqkw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-simple-radio-button@^2.7.4:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/react-native-simple-radio-button/-/react-native-simple-radio-button-2.7.4.tgz#86e2dbe8af9e6bf60eee088f60466f7a975e7758"

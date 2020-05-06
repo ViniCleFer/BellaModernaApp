@@ -49,6 +49,8 @@ export const InputArea = styled.TextInput`
   color: #312e38;
   font-weight: normal;
   padding-left: ${wp('3.75%')};
+  padding-top: ${wp('1.75%')};
+  padding-bottom: ${wp('1.75%')};
   margin-top: ${hp('0.53%')};
   align-items: center;
   border: 1px solid #958fa3;

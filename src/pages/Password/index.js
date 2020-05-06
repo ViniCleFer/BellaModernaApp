@@ -27,7 +27,11 @@ export default function Password(props) {
 
   const [pastPassowrd, setPastPassowrd] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassaword, setConfirmPassaword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  function handlePassword(confirmPassword) {
+    props.navigation.navigate('PersonalData', { confirmPassword });
+  }
 
   return (
     <Container>
@@ -46,7 +50,7 @@ export default function Password(props) {
         <SubTitle>Senha Antiga</SubTitle>
 
         <InputArea
-          placeholder="Digite seu endereço"
+          placeholder="Digite sua senha atual"
           value={pastPassowrd}
           secureTextEntry
           onChangeText={setPastPassowrd}
@@ -57,7 +61,7 @@ export default function Password(props) {
         <SubTitle>Nova Senha</SubTitle>
 
         <InputArea
-          placeholder="Digite seu endereço"
+          placeholder="Digite sua nova senha"
           ref={passwordRef}
           value={password}
           secureTextEntry
@@ -69,32 +73,33 @@ export default function Password(props) {
         <SubTitle>Redigite sua nova Senha</SubTitle>
 
         <InputArea
-          placeholder="Digite seu endereço"
+          placeholder="Redigite sua nova senha"
           ref={confirmPasswordRef}
-          value={confirmPassaword}
+          value={confirmPasswordRef}
           secureTextEntry
-          onChangeText={setConfirmPassaword}
+          onChangeText={setConfirmPassword}
           returnKeyType="send"
-          onSubmitEditing={() => {}}
+          onSubmitEditing={() => handlePassword(confirmPassword)}
         />
+
+        <AreaSubmitButton>
+          <SubmitButton
+            onPress={() => handlePassword(confirmPassword)}
+            activeOpacity={0.7}
+            style={{
+              borderRadius: 50,
+              borderColor: 'transparent',
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: hp('0.35%') },
+              shadowOpacity: 0.8,
+              shadowRadius: 2,
+              elevation: 5,
+            }}
+          >
+            <TextSubmitButton>Salvar</TextSubmitButton>
+          </SubmitButton>
+        </AreaSubmitButton>
       </AreaInfo>
-      <AreaSubmitButton>
-        <SubmitButton
-          onPress={() => {}}
-          activeOpacity={0.7}
-          style={{
-            borderRadius: 50,
-            borderColor: 'transparent',
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: hp('0.35%') },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 5,
-          }}
-        >
-          <TextSubmitButton>Salvar</TextSubmitButton>
-        </SubmitButton>
-      </AreaSubmitButton>
     </Container>
   );
 }

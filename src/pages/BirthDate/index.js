@@ -24,6 +24,10 @@ export default function BirthDate(props) {
 
   const [birth, setBirth] = useState('');
 
+  function handleBirth(birth) {
+    props.navigation.navigate('PersonalData', { birth });
+  }
+
   return (
     <Container>
       <TitleArea>
@@ -53,6 +57,8 @@ export default function BirthDate(props) {
             fontWeight: 'normal',
             paddingLeft: wp('3.75%'),
             marginTop: hp('0.53%'),
+            paddingTop: wp('1.75%'),
+            paddingBottom: wp('1.75%'),
             alignItems: 'center',
             justifyContent: 'center',
             borderStyle: 'solid',
@@ -68,7 +74,7 @@ export default function BirthDate(props) {
       </AreaInfo>
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={() => handleBirth(birth)}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
 
 import {
   Container,
@@ -18,9 +19,17 @@ import {
 } from './styles';
 
 export default function Name(props) {
+  const profile = useSelector((state) => state.user.profile);
+
   const navigateBack = () => {
     props.navigation.navigate('PersonalData');
   };
+
+  const [name, setName] = useState(profile.name);
+
+  function handleName(value) {
+    props.navigation.navigate('PersonalData', { value });
+  }
 
   return (
     <Container>
@@ -37,11 +46,16 @@ export default function Name(props) {
 
       <AreaInfo>
         <SubTitle>Nome</SubTitle>
-        <InputArea autoCorrect={false} placeholder="Digite seu nome" />
+        <InputArea
+          value={name}
+          onChangeText={(text) => setName(text)}
+          autoCorrect={false}
+          placeholder="Digite seu nome"
+        />
       </AreaInfo>
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={() => handleName(name)}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,

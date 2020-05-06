@@ -24,6 +24,10 @@ export default function SocialRecord(props) {
 
   const [cpf, setCpf] = useState('');
 
+  function handleCPF(cpf) {
+    props.navigation.navigate('PersonalData', { cpf });
+  }
+
   return (
     <Container>
       <TitleArea>
@@ -49,6 +53,8 @@ export default function SocialRecord(props) {
             color: '#625c70',
             fontWeight: 'normal',
             paddingLeft: wp('3.75%'),
+            paddingTop: wp('1.75%'),
+            paddingBottom: wp('1.75%'),
             marginTop: hp('0.53%'),
             alignItems: 'center',
             justifyContent: 'center',
@@ -65,7 +71,7 @@ export default function SocialRecord(props) {
       </AreaInfo>
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={() => handleCPF(cpf)}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,

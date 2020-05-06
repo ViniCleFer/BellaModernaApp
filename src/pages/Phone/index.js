@@ -24,6 +24,10 @@ export default function Phone(props) {
 
   const [phone, setPhone] = useState('');
 
+  function handlePhone(phone) {
+    props.navigation.navigate('PersonalData', { phone });
+  }
+
   return (
     <Container>
       <TitleArea>
@@ -54,6 +58,8 @@ export default function Phone(props) {
             color: '#625c70',
             fontWeight: 'normal',
             paddingLeft: wp('3.75%'),
+            paddingTop: wp('1.75%'),
+            paddingBottom: wp('1.75%'),
             marginTop: hp('0.53%'),
             alignItems: 'center',
             justifyContent: 'center',
@@ -70,7 +76,7 @@ export default function Phone(props) {
       </AreaInfo>
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={() => handlePhone(phone)}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,

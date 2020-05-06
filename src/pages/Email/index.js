@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
 
 import {
   Container,
@@ -21,14 +22,17 @@ import {
 } from './styles';
 
 export default function Email(props) {
+  const profile = useSelector((state) => state.user.profile);
+
   const navigateBack = () => {
     props.navigation.navigate('PersonalData');
   };
 
-  const passwordRef = useRef();
-
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  function handleEmail(email) {
+    props.navigation.navigate('PersonalData', { email });
+  }
 
   return (
     <Container>
@@ -47,35 +51,24 @@ export default function Email(props) {
         <SubTitleArea>
           <SubTitle>Alterar o e-mail de </SubTitle>
           <EmailArea>
-            <SubTitleBold>viniclefer@gmail.com</SubTitleBold>
+            <SubTitleBold>{profile.email}</SubTitleBold>
             <SubTitle> para:</SubTitle>
           </EmailArea>
         </SubTitleArea>
 
         <InputArea
           placeholder="Digite seu endereço"
+          autoCapitalize="none"
           value={email}
           keyboardType="email-address"
           onChangeText={setEmail}
           returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current.focus()}
-        />
-
-        <SubTitle>Senha</SubTitle>
-
-        <InputArea
-          placeholder="Digite seu endereço"
-          ref={passwordRef}
-          value={password}
-          secureTextEntry
-          onChangeText={setPassword}
-          returnKeyType="send"
-          onSubmitEditing={() => {}}
+          onSubmitEditing={() => handleEmail(email)}
         />
       </AreaInfo>
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={() => handleEmail(email)}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,

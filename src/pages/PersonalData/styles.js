@@ -120,6 +120,18 @@ export const TextProfile = styled.Text`
   margin-left: ${wp('7.50%')};
 `;
 
+export const TextPassword = styled.TextInput`
+  margin-top: ${hp('-1%')};
+  padding-top: ${hp('1%')};
+  padding-bottom: ${hp('1%')};
+  height: ${hp('5%')};
+  font-size: ${hp('2.11%')};
+  color: #958fa3;
+  font-weight: normal;
+  align-items: center;
+  margin-left: ${wp('7.50%')};
+`;
+
 export const NavButtonAddress = styled.TouchableHighlight`
   justify-content: center;
   background: #fff;

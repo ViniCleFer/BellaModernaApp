@@ -28,7 +28,9 @@ export const Title = styled.Text`
   margin-left: ${wp('7.5%')};
 `;
 
-export const AreaInfo = styled.View`
+export const AreaInfo = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+})`
   background-color: #fff;
   padding-top: ${hp('4.23%')};
   padding-left: ${wp('8.13%')};

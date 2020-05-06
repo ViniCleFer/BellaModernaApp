@@ -25,20 +25,40 @@ export default function Address(props) {
     props.navigation.navigate('PersonalData');
   };
 
-  const adrressRef = useRef();
-  const adrressNumberRef = useRef();
-  const adrressComplementRef = useRef();
+  const streetRef = useRef();
+  const addressNumberRef = useRef();
+  const addressComplementRef = useRef();
   const neighborhoodRef = useRef();
   const ufRef = useRef();
   const cityRef = useRef();
 
   const [zipcode, setZipcode] = useState('');
-  const [address, setAddress] = useState('');
+  const [street, setStreet] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
-  const [adrressComplement, setAdrressComplement] = useState('');
+  const [addressComplement, setAddressComplement] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [uf, setUf] = useState('');
   const [city, setCity] = useState('');
+
+  function handleAddress(
+    zipcode,
+    street,
+    addressNumber,
+    addressComplement,
+    neighborhood,
+    uf,
+    city
+  ) {
+    props.navigation.navigate('PersonalData', {
+      zipcode,
+      street,
+      addressNumber,
+      addressComplement,
+      neighborhood,
+      uf,
+      city,
+    });
+  }
 
   return (
     <Container>
@@ -65,34 +85,34 @@ export default function Address(props) {
           onChangeText={setZipcode}
           keyboardType="numeric"
           returnKeyType="next"
-          onSubmitEditing={() => adrressRef.current.focus()}
+          onSubmitEditing={() => streetRef.current.focus()}
         />
 
         <InputArea
           placeholder="Digite seu endereço"
-          ref={adrressRef}
-          value={address}
-          onChangeText={setAddress}
+          ref={streetRef}
+          value={street}
+          onChangeText={setStreet}
           returnKeyType="next"
-          onSubmitEditing={() => adrressNumberRef.current.focus()}
+          onSubmitEditing={() => addressNumberRef.current.focus()}
         />
 
         <InputAreaContainer>
           <InputArea
             placeholder="Digite seu nº"
-            ref={adrressNumberRef}
+            ref={addressNumberRef}
             keyboardType="numeric"
             value={addressNumber}
             onChangeText={setAddressNumber}
             returnKeyType="next"
-            onSubmitEditing={() => adrressComplementRef.current.focus()}
+            onSubmitEditing={() => addressComplementRef.current.focus()}
           />
 
           <InputArea
             placeholder="Apto 14, Torre 4"
-            ref={adrressComplementRef}
-            value={adrressComplement}
-            onChangeText={setAdrressComplement}
+            ref={addressComplementRef}
+            value={addressComplement}
+            onChangeText={setAddressComplement}
             returnKeyType="next"
             onSubmitEditing={() => neighborhoodRef.current.focus()}
           />
@@ -121,26 +141,47 @@ export default function Address(props) {
           value={city}
           onChangeText={setCity}
           returnKeyType="send"
-          onSubmitEditing={() => {}}
+          onSubmitEditing={() =>
+            handleAddress(
+              zipcode,
+              street,
+              addressNumber,
+              addressComplement,
+              neighborhood,
+              uf,
+              city
+            )
+          }
         />
+
+        <AreaSubmitButton>
+          <SubmitButton
+            onPress={() =>
+              handleAddress(
+                zipcode,
+                street,
+                addressNumber,
+                addressComplement,
+                neighborhood,
+                uf,
+                city
+              )
+            }
+            activeOpacity={0.7}
+            style={{
+              borderRadius: 50,
+              borderColor: 'transparent',
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: hp('0.35%') },
+              shadowOpacity: 0.8,
+              shadowRadius: 2,
+              elevation: 5,
+            }}
+          >
+            <TextSubmitButton>Salvar</TextSubmitButton>
+          </SubmitButton>
+        </AreaSubmitButton>
       </AreaInfo>
-      <AreaSubmitButton>
-        <SubmitButton
-          onPress={() => {}}
-          activeOpacity={0.7}
-          style={{
-            borderRadius: 50,
-            borderColor: 'transparent',
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: hp('0.35%') },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 5,
-          }}
-        >
-          <TextSubmitButton>Salvar</TextSubmitButton>
-        </SubmitButton>
-      </AreaSubmitButton>
     </Container>
   );
 }
@@ -154,6 +195,8 @@ const styles = StyleSheet.create({
     color: '#312e38',
     fontWeight: 'normal',
     paddingLeft: wp('3.75%'),
+    paddingTop: wp('1.75%'),
+    paddingBottom: wp('1.75%'),
     marginTop: hp('0.53%'),
     marginBottom: hp('2.82%'),
     alignItems: 'center',

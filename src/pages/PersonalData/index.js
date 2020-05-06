@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -26,6 +26,7 @@ import {
   IconArea,
   TextNavButton,
   TextProfile,
+  TextPassword,
   NavButtonAddress,
   AreaAddress,
   TextProfileAddress,
@@ -34,17 +35,149 @@ import {
 export default function PersonalData(props) {
   const profile = useSelector((state) => state.user.profile);
 
+  const dateFormatted = useMemo(
+    () =>
+      format(new Date(profile.birth), 'dd/MM/yyy', {
+        locale: pt,
+      }),
+    []
+  );
+
+  const EditName = props.navigation.getParam('value');
+  const EditPhone = props.navigation.getParam('phone');
+  const EditCpf = props.navigation.getParam('cpf');
+  const EditBirth = props.navigation.getParam('birth');
+  const EditZipcode = props.navigation.getParam('zipcode');
+  const EditStreet = props.navigation.getParam('street');
+  const EditAddressNumber = props.navigation.getParam('addressNumber');
+  const EditAddressComplement = props.navigation.getParam('addressComplement');
+  const EditNeighborhood = props.navigation.getParam('neighborhood');
+  const EditUf = props.navigation.getParam('uf');
+  const EditCity = props.navigation.getParam('city');
+  const EditEmail = props.navigation.getParam('email');
+  const EditPassword = props.navigation.getParam('confirmPassword');
+
   const navigateBack = () => {
     props.navigation.navigate('Account');
   };
 
-  const dateFormatted = useMemo(
-    () =>
-      format(new Date(profile.birth), 'dd/MM/yyyy', {
-        locale: pt,
-      }),
-    [profile.birth]
-  );
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [birth, setBirth] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [street, setStreet] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
+  const [addressComplement, setAddressComplement] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
+  const [uf, setUf] = useState('');
+  const [city, setCity] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (name === '') {
+      setName(profile.name);
+    } else {
+      setName(EditName);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (phone === '') {
+      setPhone('(11) 97745-6642');
+    } else {
+      setPhone(EditPhone);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cpf === '') {
+      setCpf('396.483.948-30');
+    } else {
+      setCpf(EditCpf);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (birth === '') {
+      setBirth(dateFormatted);
+    } else {
+      setBirth(EditBirth);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (zipcode === '') {
+      setZipcode('13324-220');
+    } else {
+      setZipcode(EditZipcode);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (street === '') {
+      setStreet('Rua Estados Unidos');
+    } else {
+      setStreet(EditStreet);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (addressNumber === '') {
+      setAddressNumber('195');
+    } else {
+      setAddressNumber(EditAddressNumber);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (addressComplement === '') {
+      setAddressComplement('Bloco 4, Apto 14');
+    } else {
+      setAddressComplement(EditAddressComplement);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (neighborhood === '') {
+      setNeighborhood('Guaraú');
+    } else {
+      setNeighborhood(EditNeighborhood);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (uf === '') {
+      setUf('São Paulo');
+    } else {
+      setUf(EditUf);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (city === '') {
+      setCity('Salto');
+    } else {
+      setCity(EditCity);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (email === '') {
+      setEmail(profile.email);
+    } else {
+      setEmail(EditEmail);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (password === '') {
+      setPassword('123456');
+    } else {
+      setPassword(EditPassword);
+    }
+  }, []);
 
   return (
     <Container showsVerticalScrollIndicator={false}>
@@ -88,7 +221,7 @@ export default function PersonalData(props) {
           <ButtonNavArea>
             <ButtonArea>
               <TextNavButton>Nome</TextNavButton>
-              <TextProfile>{profile.name}</TextProfile>
+              <TextProfile>{name}</TextProfile>
             </ButtonArea>
             <IconArea>
               <Icon
@@ -107,7 +240,7 @@ export default function PersonalData(props) {
           <ButtonNavArea>
             <ButtonArea>
               <TextNavButton>Telefone</TextNavButton>
-              <TextProfile>(11) 97745-6642</TextProfile>
+              <TextProfile>{phone}</TextProfile>
             </ButtonArea>
             <IconArea>
               <Icon
@@ -126,7 +259,7 @@ export default function PersonalData(props) {
           <ButtonNavArea>
             <ButtonArea>
               <TextNavButton>CPF</TextNavButton>
-              <TextProfile>386.483.948-30</TextProfile>
+              <TextProfile>{cpf}</TextProfile>
             </ButtonArea>
             <IconArea>
               <Icon
@@ -145,7 +278,7 @@ export default function PersonalData(props) {
           <ButtonNavArea>
             <ButtonArea>
               <TextNavButton>Data de Nascimento</TextNavButton>
-              <TextProfile>{dateFormatted}</TextProfile>
+              <TextProfile>{birth}</TextProfile>
             </ButtonArea>
             <IconArea>
               <Icon
@@ -166,8 +299,8 @@ export default function PersonalData(props) {
               <TextNavButton>Endereço</TextNavButton>
               <AreaAddress>
                 <TextProfileAddress>
-                  Av. Comandandante Videlmo Munhoz, 75 Anhangabaú, Jundiaí - SP,
-                  13208-050
+                  {street}, {addressNumber}, {addressComplement}, {neighborhood}
+                  , {city} - {uf}, {zipcode}
                 </TextProfileAddress>
               </AreaAddress>
             </ButtonArea>
@@ -193,7 +326,7 @@ export default function PersonalData(props) {
           <ButtonNavArea>
             <ButtonArea>
               <TextNavButton>E-mail</TextNavButton>
-              <TextProfile>{profile.email}</TextProfile>
+              <TextProfile>{email}</TextProfile>
             </ButtonArea>
             <IconArea>
               <Icon
@@ -212,7 +345,7 @@ export default function PersonalData(props) {
           <ButtonNavArea>
             <ButtonArea>
               <TextNavButton>Alterar Senha</TextNavButton>
-              <TextProfile>*************</TextProfile>
+              <TextPassword secureTextEntry value={password} />
             </ButtonArea>
             <IconArea>
               <Icon

@@ -33,6 +33,7 @@
     "react-native-responsive-screen": "^1.4.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
+    "react-native-select-multiple": "^2.1.0",
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-timeline-flatlist": "^0.7.2",
     "react-native-timeline-listview": "^0.2.3",
