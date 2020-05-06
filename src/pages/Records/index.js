@@ -146,7 +146,7 @@ export default function Records(props) {
         <SubTitle>Problemas</SubTitle>
         <ProblemsArea>
           <ProblemButton activeOpacity={0.6} onPress={handleProblems}>
-            <ItensSelected>{count} selecionados</ItensSelected>
+            <ItensSelected>2 selecionados</ItensSelected>
             <IconArea>
               <Icon
                 name="arrow-drop-down"
