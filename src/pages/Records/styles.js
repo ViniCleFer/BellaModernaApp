@@ -3,6 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import SelectMultiple from 'react-native-select-multiple';
 
 export const Container = styled.ScrollView`
   flex: 1;
@@ -77,40 +78,54 @@ export const SubTitle = styled.Text`
   margin-top: ${hp('2.46%')};
 `;
 
-export const AnswerArea = styled.View`
+export const SubjectArea = styled.View``;
+
+export const SubjectButton = styled.TouchableOpacity`
+  flex-direction: row;
   font-size: ${hp('2.82%')};
   height: ${hp('6.34%')};
   align-self: stretch;
-  color: #625c70;
+  color: #312e38;
   font-weight: normal;
   margin-top: ${hp('0.53%')};
+  align-items: center;
   border: 1px solid #958fa3;
   border-radius: 4px;
-  justify-content: center;
 `;
 
 export const AnswerText = styled.Text`
   font-size: ${hp('2.82%')};
+  line-height: ${hp('4.23%')};
   color: #625c70;
   font-weight: normal;
   margin-left: ${wp('3.75%')};
 `;
 
-export const SubjectArea = styled.View`
-  padding-top: ${hp('2%')};
-  padding-bottom: ${hp('0.70%')};
-  margin-top: ${hp('-0.36%')};
-  border: 1px solid #958fa3;
-  border-bottom-left-radius: ${wp('1.25%')};
-  border-bottom-right-radius: ${wp('1.25%')};
-  background-color: #fff;
+export const Subject = styled.Modal``;
+
+export const SubjectAreaItens = styled.View`
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
 `;
 
-export const Subject = styled.Picker`
+export const SubjectItens = styled.View`
+  background-color: #fff;
+  width: ${wp('75.94%')};
+  padding-top: ${hp('2.82%')};
+  padding-bottom: ${hp('2.82%')};
+  padding-left: ${wp('5.0%')};
+  border-radius: 4;
+`;
+
+export const SubjectTextArea = styled.TouchableOpacity``;
+
+export const SubjectText = styled.TextInput`
   font-size: ${hp('2.82%')};
   color: #625c70;
   font-weight: normal;
-  margin-left: ${wp('1.5%')};
 `;
 
 export const ProblemsArea = styled.View``;
@@ -146,9 +161,10 @@ export const ProblemsAreaItens = styled.View`
   justify-content: center;
 `;
 
-export const ProblemsItens = styled.View`
+export const ProblemsItens = styled.View``;
+
+export const ProblemsItens1 = styled.View`
   background-color: #fff;
-  width: 300px;
   padding-top: ${hp('3.52%')};
   padding-bottom: ${hp('3.52%')};
   padding-left: ${wp('6.25%')};
@@ -168,7 +184,10 @@ export const InputSearch = styled.TouchableOpacity`
   border-radius: 4px;
 `;
 
-export const Itens = styled.View`
+export const Itens = styled.View``;
+export const Itens1 = styled.SelectMultiple``;
+
+export const Itens2 = styled.View`
   flex-direction: row;
   padding-right: ${wp('6.25%')};
   margin-top: ${hp('2.46%')};
@@ -247,6 +266,7 @@ export const ConclusionSelected = styled.Text`
   color: #625c70;
   font-weight: normal;
   margin-left: ${wp('3.75%')};
+  margin-right: ${wp('3.75%')};
 `;
 
 export const Conclusions = styled.Modal``;
@@ -302,13 +322,30 @@ export const RiskSelected = styled.View`
   align-items: center;
 `;
 
+export const RiskSelected2 = styled.TextInput`
+  font-size: ${hp('2.8%')};
+  line-height: ${hp('4.23%')};
+  color: #625c70;
+  font-weight: normal;
+  padding: 5px;
+  margin-left: ${wp('2%')};
+`;
+
+export const RiskInput = styled.TextInput`
+  font-size: ${hp('2.8%')};
+  line-height: ${hp('4.23%')};
+  color: #625c70;
+  font-weight: normal;
+  padding: 5px;
+  margin-left: ${wp('2%')};
+`;
+
 export const RiskColorSelected = styled.View`
   height: ${hp('2.82%')};
   width: ${wp('7.5%')};
   margin-left: ${wp('3.75%')};
   margin-right: ${wp('2.5%')};
   border-radius: 4;
-  background-color: #fa375a;
 `;
 
 export const RiskTextSelected = styled.Text`
@@ -349,6 +386,14 @@ export const RiskAreaItens = styled.View`
   padding-right: ${wp('6.25%')};
   margin-top: ${hp('2.46%')};
   align-items: center;
+`;
+
+export const RiskColorGray = styled.View`
+  height: ${hp('2.82%')};
+  width: ${wp('7.5%')};
+  margin-right: ${wp('2.5%')};
+  border-radius: 4;
+  background-color: #eee;
 `;
 
 export const RiskColorRed = styled.View`

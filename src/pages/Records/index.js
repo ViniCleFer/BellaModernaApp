@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import { View, Text, Alert } from 'react-native';
+
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import SelectMultiple from 'react-native-select-multiple';
+
 import { useSelector } from 'react-redux';
 
 import {
@@ -18,8 +20,14 @@ import {
   DoctorImage,
   DoctorName,
   IconArea,
-  AnswerArea,
+  SubjectArea,
+  SubjectButton,
+  AnswerText,
   Subject,
+  SubjectAreaItens,
+  SubjectItens,
+  SubjectTextArea,
+  SubjectText,
   ProblemsArea,
   ProblemButton,
   ItensSelected,
@@ -28,7 +36,6 @@ import {
   ProblemsItens,
   InputSearch,
   Itens,
-  ProblemsItensText,
   AreaProblem,
   InfoProblem,
   BodyText,
@@ -58,6 +65,7 @@ import {
   RiskColorYellow,
   RiskColorGreen,
   RiskColorBlue,
+  RiskColorGray,
   RiskText,
   AreaSubmitButton,
   SubmitButton,
@@ -71,26 +79,91 @@ export default function Records(props) {
 
   const profile = useSelector((state) => state.user.profile);
 
-  const [selectedValue, setSelectedValue] = useState('');
+  const problems = [
+    { label: 'Cólicas Menstruais', value: 'Cólicas Menstruais' },
+    { label: 'Corrimentos', value: 'Corrimentos' },
+    { label: 'Pediatria', value: 'Pediatria' },
+    {
+      label: 'Menstruação em Excesso (hemorragias)',
+      value: 'Menstruação em Excesso (hemorragias)',
+    },
+    {
+      label: 'Falta / Atraso de menstruação',
+      value: 'Falta / Atraso de menstruação',
+    },
+    { label: 'Dor pelvica', value: 'Dor pelvica' },
+    { label: 'Dor lombar', value: 'Dor lombar' },
+  ];
+
+  const renderLabel = (label, style) => {
+    return (
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View>
+          <Text style={style}>{label}</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const [subject, setSubject] = useState('Escolha o assunto');
+  const [modalSubjectVisible, setModalSubjectVisible] = useState(false);
+
+  const [selectedProblems, setProblems] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalRiskVisible, setModalRiskVisible] = useState(false);
+
+  const [conclusion, setConclusion] = useState('Escolha o fechamento');
   const [modalConclusionVisible, setModalConclusionVisible] = useState(false);
-  const [isSelected, setSelection] = useState(false);
-  const [count, setCount] = useState(0);
+
+  const [risk, setRisk] = useState('Escolha o risco');
+  const [colorRisk, setColorRisk] = useState(<RiskColorGray />);
+  const [modalRiskVisible, setModalRiskVisible] = useState(false);
+
+  function handleSubject(value) {
+    setSubject(value);
+    setModalSubjectVisible(false);
+  }
+
+  function onSelectionsChange(selectedProblems) {
+    setProblems(selectedProblems);
+  }
 
   function handleProblems() {
-    setModalVisible(true);
-  }
-
-  function countProblems() {
     setModalVisible(false);
-    const checked = isSelected;
-
-    setCount(checked);
   }
 
-  function handleRisk() {
-    setModalRiskVisible(true);
+  function handleConclusion(subject) {
+    setConclusion(subject);
+    setModalConclusionVisible(false);
+  }
+
+  function handleRedRisk(value) {
+    setRisk(value);
+    setColorRisk(<RiskColorRed />);
+    setModalRiskVisible(false);
+  }
+
+  function handleOrangeRisk(value) {
+    setRisk(value);
+    setColorRisk(<RiskColorOrange />);
+    setModalRiskVisible(false);
+  }
+
+  function handleYellowRisk(value) {
+    setRisk(value);
+    setColorRisk(<RiskColorYellow />);
+    setModalRiskVisible(false);
+  }
+
+  function handleGreenRisk(value) {
+    setRisk(value);
+    setColorRisk(<RiskColorGreen />);
+    setModalRiskVisible(false);
+  }
+
+  function handleBlueRisk(value) {
+    setRisk(value);
+    setColorRisk(<RiskColorBlue />);
+    setModalRiskVisible(false);
   }
 
   return (
@@ -130,23 +203,58 @@ export default function Records(props) {
 
         <SubTitle>Assunto do Atendimento</SubTitle>
 
-        <AnswerArea>
-          <Subject
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
-            selectedValue={selectedValue}
-            mode="dropdown"
+        <SubjectArea>
+          <SubjectButton
+            activeOpacity={0.6}
+            onPress={() => setModalSubjectVisible(true)}
           >
-            <Subject.Item label="Obstetrícia" value="Obstetrícia" />
-            <Subject.Item label="Saúde da Mulher" value="Saúde da Mulher" />
-            <Subject.Item label="Pediatria" value="Pediatria" />
-            <Subject.Item label="Alimentação" value="Alimentação" />
+            <AnswerText>{subject}</AnswerText>
+            <IconArea>
+              <Icon
+                name="arrow-drop-down"
+                size={22}
+                color="#625C70"
+                style={{
+                  marginRight: wp('3%'),
+                  alignItems: 'center',
+                }}
+              />
+            </IconArea>
+          </SubjectButton>
+          <Subject
+            visible={modalSubjectVisible}
+            animationType="fade"
+            transparent
+            onRequestClose={() => setModalSubjectVisible(false)}
+          >
+            <SubjectAreaItens>
+              <SubjectItens>
+                <SubjectTextArea onPress={() => handleSubject('Obstetrícia')}>
+                  <SubjectText value="Obstetrícia" editable={false} />
+                </SubjectTextArea>
+                <SubjectTextArea
+                  onPress={() => handleSubject('Saúde da Mulher')}
+                >
+                  <SubjectText value="Saúde da Mulher" editable={false} />
+                </SubjectTextArea>
+                <SubjectTextArea onPress={() => handleSubject('Pediatria')}>
+                  <SubjectText value="Pediatria" editable={false} />
+                </SubjectTextArea>
+                <SubjectTextArea onPress={() => handleSubject('Alimentação')}>
+                  <SubjectText value="Alimentação" editable={false} />
+                </SubjectTextArea>
+              </SubjectItens>
+            </SubjectAreaItens>
           </Subject>
-        </AnswerArea>
+        </SubjectArea>
 
         <SubTitle>Problemas</SubTitle>
         <ProblemsArea>
-          <ProblemButton activeOpacity={0.6} onPress={handleProblems}>
-            <ItensSelected>2 selecionados</ItensSelected>
+          <ProblemButton
+            activeOpacity={0.6}
+            onPress={() => setModalVisible(true)}
+          >
+            <ItensSelected>selecionados</ItensSelected>
             <IconArea>
               <Icon
                 name="arrow-drop-down"
@@ -167,6 +275,7 @@ export default function Records(props) {
           >
             <ProblemsAreaItens>
               <ProblemsItens>
+                {/*
                 <InputSearch
                   onPress={() =>
                     Alert.alert(
@@ -187,45 +296,20 @@ export default function Records(props) {
                     />
                   </IconArea>
                 </InputSearch>
+
+
                 <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Cólicas Menstruais</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Corrimentos</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Pediatria</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Coceira Vaginal</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>
-                    Menstruação em Excesso (hemorragias)
-                  </ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>
-                    Falta / Atraso de menstruação
-                  </ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Dor pelvica</ProblemsItensText>
-                </Itens>
-                <Itens>
-                  <CheckBox value={isSelected} onValueChange={setSelection} />
-                  <ProblemsItensText>Dor lombar</ProblemsItensText>
+                  <SelectMultiple
+                    items={problems}
+                    renderLabel={renderLabel}
+                    selectedItems={selectedProblems}
+                    onSelectionsChange={onSelectionsChange}
+                  />
                 </Itens>
 
+                */}
                 <SubmitButton
-                  onPress={countProblems}
+                  onPress={() => handleProblems}
                   activeOpacity={0.7}
                   style={{
                     borderRadius: 50,
@@ -240,26 +324,21 @@ export default function Records(props) {
           </Problems>
         </ProblemsArea>
 
-        <AreaProblem>
-          <InfoProblem>
-            <Icon
-              name="check"
-              color="#A51C60"
-              size={18}
-              style={{ marginRight: wp('1.88%') }}
-            />
-            <BodyText>Dor de cabeça</BodyText>
-          </InfoProblem>
-          <InfoProblem>
-            <Icon
-              name="check"
-              color="#A51C60"
-              size={18}
-              style={{ marginRight: wp('1.88%') }}
-            />
-            <BodyText>Febre</BodyText>
-          </InfoProblem>
+        {/*
+          <AreaProblem>
+          {selectedProblems.map((selectedProblems) => (
+            <InfoProblem>
+              <Icon
+                name="check"
+                color="#A51C60"
+                size={18}
+                style={{ marginRight: wp('1.88%') }}
+              />
+              <BodyText>{selectedProblems.value}</BodyText>
+            </InfoProblem>
+          ))}
         </AreaProblem>
+        */}
 
         <SubTitle>Seu pré-natal está em dia?</SubTitle>
         <AreaProblem
@@ -312,7 +391,7 @@ export default function Records(props) {
         <BecauseArea>
           <BecauseInput
             placeholder="Não perguntei"
-            placeholderTextColor="#625c70"
+            placeholderTextColor="#ccc"
           />
         </BecauseArea>
 
@@ -322,8 +401,8 @@ export default function Records(props) {
             activeOpacity={0.6}
             onPress={() => setModalConclusionVisible(true)}
           >
-            <ConclusionSelected>
-              Orientada a retornar para...
+            <ConclusionSelected numberOfLines={1}>
+              {conclusion}
             </ConclusionSelected>
             <IconArea>
               <Icon
@@ -346,33 +425,47 @@ export default function Records(props) {
             <ConclusionsAreaItens>
               <ConclusionItens style={{ paddingTop: hp('-2.46%') }}>
                 <ConclusionTextArea
-                  onPress={() => setModalConclusionVisible(false)}
+                  onPress={() => handleConclusion('Internação concluída')}
                 >
                   <ConclusionText>Interação concluída</ConclusionText>
                 </ConclusionTextArea>
                 <ConclusionTextArea
-                  onPress={() => setModalConclusionVisible(false)}
+                  onPress={() =>
+                    handleConclusion('Orientada a retornar para reavaliação')
+                  }
                 >
                   <ConclusionText>
                     Orientada a retornar para reavaliação
                   </ConclusionText>
                 </ConclusionTextArea>
                 <ConclusionTextArea
-                  onPress={() => setModalConclusionVisible(false)}
+                  onPress={() =>
+                    handleConclusion(
+                      'Orientada a realizar uma interação com outro profissional'
+                    )
+                  }
                 >
                   <ConclusionText>
                     Orientada a realizar uma interação com outro profissional
                   </ConclusionText>
                 </ConclusionTextArea>
                 <ConclusionTextArea
-                  onPress={() => setModalConclusionVisible(false)}
+                  onPress={() =>
+                    handleConclusion(
+                      'Orientada a procurar uma avaliação médica nas próximas 24h'
+                    )
+                  }
                 >
                   <ConclusionText>
                     Orientada a procurar uma avaliação médica nas próximas 24h
                   </ConclusionText>
                 </ConclusionTextArea>
                 <ConclusionTextArea
-                  onPress={() => setModalConclusionVisible(false)}
+                  onPress={() =>
+                    handleConclusion(
+                      'Orientada a procurar um pronto atendimento'
+                    )
+                  }
                 >
                   <ConclusionText>
                     Orientada a procurar um pronto atendimento
@@ -385,15 +478,18 @@ export default function Records(props) {
 
         <SubTitle>Deverá retornar em quantas horas?</SubTitle>
         <BecauseArea>
-          <BecauseInput placeholder="2 horas" placeholderTextColor="#625c70" />
+          <BecauseInput placeholder="2 horas" placeholderTextColor="#ccc" />
         </BecauseArea>
 
         <SubTitle>Classificação de risco</SubTitle>
         <RiskArea>
-          <RiskButton activeOpacity={0.6} onPress={handleRisk}>
+          <RiskButton
+            activeOpacity={0.6}
+            onPress={() => setModalRiskVisible(true)}
+          >
             <RiskSelected>
-              <RiskColorSelected />
-              <RiskTextSelected>Vermelho</RiskTextSelected>
+              <RiskColorSelected>{colorRisk}</RiskColorSelected>
+              <RiskTextSelected>{risk}</RiskTextSelected>
             </RiskSelected>
 
             <IconArea>
@@ -416,34 +512,34 @@ export default function Records(props) {
           >
             <RiskContainerItens>
               <RiskItens>
-                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                <RiskButtonItem onPress={() => handleRedRisk('Alto')}>
                   <RiskAreaItens>
                     <RiskColorRed />
-                    <RiskText>Vermelho</RiskText>
+                    <RiskText>Alto</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
-                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                <RiskButtonItem onPress={() => handleOrangeRisk('Laranja')}>
                   <RiskAreaItens>
                     <RiskColorOrange />
                     <RiskText>Laranja</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
-                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                <RiskButtonItem onPress={() => handleYellowRisk('Médio')}>
                   <RiskAreaItens>
                     <RiskColorYellow />
-                    <RiskText>Amarelo</RiskText>
+                    <RiskText>Médio</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
-                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                <RiskButtonItem onPress={() => handleGreenRisk('Verde')}>
                   <RiskAreaItens>
                     <RiskColorGreen />
                     <RiskText>Verde</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
-                <RiskButtonItem onPress={() => setModalRiskVisible(false)}>
+                <RiskButtonItem onPress={() => handleBlueRisk('Habitual')}>
                   <RiskAreaItens>
                     <RiskColorBlue />
-                    <RiskText>Azul</RiskText>
+                    <RiskText>Habitual</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
               </RiskItens>
