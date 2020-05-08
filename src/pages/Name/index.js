@@ -4,7 +4,6 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useSelector } from 'react-redux';
 
 import {
   Container,
@@ -19,13 +18,11 @@ import {
 } from './styles';
 
 export default function Name(props) {
-  const profile = useSelector((state) => state.user.profile);
-
   const navigateBack = () => {
     props.navigation.navigate('PersonalData');
   };
 
-  const [name, setName] = useState(profile.name);
+  const [name, setName] = useState();
 
   function handleName(value) {
     props.navigation.navigate('PersonalData', { value });

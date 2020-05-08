@@ -81,15 +81,15 @@ export default function PersonalData(props) {
     } else {
       setName(EditName);
     }
-  }, []);
+  }, [EditName]);
 
   useEffect(() => {
     if (phone === '') {
-      setPhone('(11) 97745-6642');
+      setPhone('(11) 9 7745-6642');
     } else {
       setPhone(EditPhone);
     }
-  }, []);
+  }, [EditPhone]);
 
   useEffect(() => {
     if (cpf === '') {
@@ -97,7 +97,7 @@ export default function PersonalData(props) {
     } else {
       setCpf(EditCpf);
     }
-  }, []);
+  }, [EditCpf]);
 
   useEffect(() => {
     if (birth === '') {
@@ -105,7 +105,7 @@ export default function PersonalData(props) {
     } else {
       setBirth(EditBirth);
     }
-  }, []);
+  }, [EditBirth]);
 
   useEffect(() => {
     if (zipcode === '') {
@@ -113,7 +113,7 @@ export default function PersonalData(props) {
     } else {
       setZipcode(EditZipcode);
     }
-  }, []);
+  }, [EditZipcode]);
 
   useEffect(() => {
     if (street === '') {
@@ -121,7 +121,7 @@ export default function PersonalData(props) {
     } else {
       setStreet(EditStreet);
     }
-  }, []);
+  }, [EditStreet]);
 
   useEffect(() => {
     if (addressNumber === '') {
@@ -129,7 +129,7 @@ export default function PersonalData(props) {
     } else {
       setAddressNumber(EditAddressNumber);
     }
-  }, []);
+  }, [EditAddressNumber]);
 
   useEffect(() => {
     if (addressComplement === '') {
@@ -137,7 +137,7 @@ export default function PersonalData(props) {
     } else {
       setAddressComplement(EditAddressComplement);
     }
-  }, []);
+  }, [EditAddressComplement]);
 
   useEffect(() => {
     if (neighborhood === '') {
@@ -145,7 +145,7 @@ export default function PersonalData(props) {
     } else {
       setNeighborhood(EditNeighborhood);
     }
-  }, []);
+  }, [EditNeighborhood]);
 
   useEffect(() => {
     if (uf === '') {
@@ -153,7 +153,7 @@ export default function PersonalData(props) {
     } else {
       setUf(EditUf);
     }
-  }, []);
+  }, [EditUf]);
 
   useEffect(() => {
     if (city === '') {
@@ -161,7 +161,7 @@ export default function PersonalData(props) {
     } else {
       setCity(EditCity);
     }
-  }, []);
+  }, [EditCity]);
 
   useEffect(() => {
     if (email === '') {
@@ -169,7 +169,7 @@ export default function PersonalData(props) {
     } else {
       setEmail(EditEmail);
     }
-  }, []);
+  }, [EditEmail]);
 
   useEffect(() => {
     if (password === '') {
@@ -177,7 +177,7 @@ export default function PersonalData(props) {
     } else {
       setPassword(EditPassword);
     }
-  }, []);
+  }, [EditPassword]);
 
   return (
     <Container showsVerticalScrollIndicator={false}>
@@ -361,3 +361,48 @@ export default function PersonalData(props) {
     </Container>
   );
 }
+
+/*
+  useEffect(() => {
+    name,
+    phone,
+    cpf,
+    birth,
+    street,
+    addressNumber,
+    addressComplement,
+    neighborhood,
+    city,
+    uf,
+    email,
+    password,
+
+    setName(EditName);
+    setPhone(EditPhone);
+    setCpf(EditCpf);
+    setBirth(EditBirth);
+    setZipcode(EditZipcode);
+    setStreet(EditStreet);
+    setAddressNumber(EditAddressNumber);
+    setAddressComplement(EditAddressComplement);
+    setNeighborhood(EditNeighborhood);
+    setUf(EditUf);
+    setCity(EditCity);
+    setEmail(EditEmail);
+    setPassword(EditPassword);
+  }, [
+    EditName,
+    EditPhone,
+    EditCpf,
+    EditBirth,
+    EditStreet,
+    EditAddressNumber,
+    EditAddressComplement,
+    EditNeighborhood,
+    EditCity,
+    EditUf,
+    EditEmail,
+    EditPassword,
+  ]);
+
+  */
