@@ -1,3 +1,16 @@
+import React from 'react';
+import { View } from 'react-native';
+
+// import { Container } from './styles';
+
+const Conversations = () => {
+  return <View />;
+};
+
+export default Conversations;
+
+/*
+
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
@@ -68,3 +81,5 @@ export default function Conversations() {
     </>
   );
 }
+
+*/

@@ -38,6 +38,7 @@ import {
   Itens,
   AreaProblem,
   InfoProblem,
+  RadioArea,
   BodyText,
   RadioText,
   BecauseArea,
@@ -111,6 +112,8 @@ export default function Records(props) {
   const [selectedProblems, setProblems] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [checked, setChecked] = useState(false);
+
   const [conclusion, setConclusion] = useState('Escolha o fechamento');
   const [modalConclusionVisible, setModalConclusionVisible] = useState(false);
 
@@ -129,6 +132,10 @@ export default function Records(props) {
 
   function handleProblems() {
     setModalVisible(false);
+  }
+
+  function handleChecked() {
+    setChecked(checked);
   }
 
   function handleConclusion(subject) {
@@ -254,7 +261,13 @@ export default function Records(props) {
             activeOpacity={0.6}
             onPress={() => setModalVisible(true)}
           >
-            <ItensSelected>selecionados</ItensSelected>
+            {selectedProblems === 0 ? (
+              <ItensSelected>0 selecionados</ItensSelected>
+            ) : (
+              <ItensSelected>
+                {selectedProblems.length} selecionados
+              </ItensSelected>
+            )}
             <IconArea>
               <Icon
                 name="arrow-drop-down"
@@ -275,7 +288,6 @@ export default function Records(props) {
           >
             <ProblemsAreaItens>
               <ProblemsItens>
-                {/*
                 <InputSearch
                   onPress={() =>
                     Alert.alert(
@@ -297,7 +309,6 @@ export default function Records(props) {
                   </IconArea>
                 </InputSearch>
 
-
                 <Itens>
                   <SelectMultiple
                     items={problems}
@@ -307,9 +318,8 @@ export default function Records(props) {
                   />
                 </Itens>
 
-                */}
                 <SubmitButton
-                  onPress={() => handleProblems}
+                  onPress={() => handleProblems()}
                   activeOpacity={0.7}
                   style={{
                     borderRadius: 50,
@@ -324,8 +334,7 @@ export default function Records(props) {
           </Problems>
         </ProblemsArea>
 
-        {/*
-          <AreaProblem>
+        <AreaProblem>
           {selectedProblems.map((selectedProblems) => (
             <InfoProblem>
               <Icon
@@ -338,7 +347,6 @@ export default function Records(props) {
             </InfoProblem>
           ))}
         </AreaProblem>
-        */}
 
         <SubTitle>Seu pré-natal está em dia?</SubTitle>
         <AreaProblem
@@ -354,17 +362,33 @@ export default function Records(props) {
               justifyContent: 'center',
             }}
           >
-            <Icon
-              name="radio-button-checked"
-              color="#A51C60"
-              size={18}
-              style={{
-                marginRight: wp('1.88%'),
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            />
-            <RadioText>Sim</RadioText>
+            {checked ? (
+              <Icon
+                name="radio-button-unchecked"
+                color="#958FA3"
+                size={18}
+                style={{
+                  marginRight: wp('1.88%'),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              />
+            ) : (
+              <Icon
+                name="radio-button-checked"
+                color="#A51C60"
+                size={18}
+                style={{
+                  marginRight: wp('1.88%'),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              />
+            )}
+
+            <RadioArea onPress={(checked) => setChecked(!checked)}>
+              <RadioText>Sim</RadioText>
+            </RadioArea>
           </InfoProblem>
           <InfoProblem
             style={{
@@ -373,17 +397,32 @@ export default function Records(props) {
               justifyContent: 'center',
             }}
           >
-            <Icon
-              name="radio-button-unchecked"
-              color="#958FA3"
-              size={18}
-              style={{
-                marginRight: wp('1.88%'),
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            />
-            <RadioText>Não</RadioText>
+            {checked ? (
+              <Icon
+                name="radio-button-checked"
+                color="#A51C60"
+                size={18}
+                style={{
+                  marginRight: wp('1.88%'),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              />
+            ) : (
+              <Icon
+                name="radio-button-unchecked"
+                color="#958FA3"
+                size={18}
+                style={{
+                  marginRight: wp('1.88%'),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              />
+            )}
+            <RadioArea onPress={(checked) => setChecked(checked)}>
+              <RadioText>Não</RadioText>
+            </RadioArea>
           </InfoProblem>
         </AreaProblem>
 

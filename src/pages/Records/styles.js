@@ -3,7 +3,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import SelectMultiple from 'react-native-select-multiple';
 
 export const Container = styled.ScrollView`
   flex: 1;
@@ -161,9 +160,7 @@ export const ProblemsAreaItens = styled.View`
   justify-content: center;
 `;
 
-export const ProblemsItens = styled.View``;
-
-export const ProblemsItens1 = styled.View`
+export const ProblemsItens = styled.View`
   background-color: #fff;
   padding-top: ${hp('3.52%')};
   padding-bottom: ${hp('3.52%')};
@@ -184,10 +181,7 @@ export const InputSearch = styled.TouchableOpacity`
   border-radius: 4px;
 `;
 
-export const Itens = styled.View``;
-export const Itens1 = styled.SelectMultiple``;
-
-export const Itens2 = styled.View`
+export const Itens = styled.View`
   flex-direction: row;
   padding-right: ${wp('6.25%')};
   margin-top: ${hp('2.46%')};
@@ -216,6 +210,8 @@ export const BodyText = styled.Text`
   padding-bottom: ${hp('0.18%')};
 `;
 
+export const RadioArea = styled.TouchableOpacity``;
+
 export const RadioText = styled.Text`
   font-size: ${hp('2.82%')};
   font-weight: normal;
@@ -238,11 +234,11 @@ export const BecauseArea = styled.View`
 
 export const BecauseInput = styled.TextInput`
   font-size: ${hp('2.8%')};
-  line-height: ${hp('4.23%')};
   color: #625c70;
   font-weight: normal;
   padding: 5px;
   margin-left: ${wp('2%')};
+  overflow: hidden;
 `;
 
 export const ConclusionsArea = styled.View``;
