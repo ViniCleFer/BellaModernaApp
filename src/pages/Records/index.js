@@ -75,7 +75,7 @@ import {
 
 export default function Records(props) {
   const navigateBack = () => {
-    props.navigation.navigate('PersonalData');
+    props.navigation.navigate('Conversations');
   };
 
   const profile = useSelector((state) => state.user.profile);

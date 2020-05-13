@@ -5,3 +5,13 @@ const api = axios.create({
 });
 
 export default api;
+
+/* 
+
+  baseURL para Emulador Android
+  baseURL: 'http://10.0.2.2:3333'  
+  
+  baseURL para Emulador Ios
+  baseURL: 'http://localhost:3333'  
+  
+*/

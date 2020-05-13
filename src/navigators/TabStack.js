@@ -11,7 +11,14 @@ import SwitchMore from '~/navigators/SwitchMore';
 
 const TabStack = createBottomTabNavigator(
   {
-    Conversas,
+    Conversas: {
+      screen: Conversas,
+      navigationOptions: {
+        header: null,
+        title: 'Conversas',
+        tabBarVisible: false
+      },
+    },
     Records: {
       screen: Records,
       navigationOptions: {
