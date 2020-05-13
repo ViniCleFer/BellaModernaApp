@@ -1,22 +1,20 @@
 import React from 'react';
-
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Conversas from '~/pages/Conversations';
+import Conversations from '~/pages/Conversations';
 import Records from '~/pages/Records';
 import StackPersons from '~/navigators/StackPersons';
 import SwitchMore from '~/navigators/SwitchMore';
 
 const TabStack = createBottomTabNavigator(
   {
-    Conversas: {
-      screen: Conversas,
+    Conversations: {
+      screen: Conversations,
       navigationOptions: {
         header: null,
         title: 'Conversas',
-        tabBarVisible: false
       },
     },
     Records: {
@@ -62,7 +60,7 @@ const TabStack = createBottomTabNavigator(
         const IconComponent = Icon;
         let iconName;
 
-        if (routeName === 'Conversas') iconName = 'comments';
+        if (routeName === 'Conversations') iconName = 'comments';
         else if (routeName === 'Records') iconName = 'user-md';
         else if (routeName === 'StackPersons') iconName = 'users';
         else if (routeName === 'SwitchMore') iconName = 'ellipsis-h';
@@ -77,7 +75,7 @@ const TabStack = createBottomTabNavigator(
         );
       },
     }),
-  }
+  },
 );
 
 export default TabStack;

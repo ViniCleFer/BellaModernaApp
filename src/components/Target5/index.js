@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { AppTourView } from 'react-native-app-tour';
 
-import { Container, ContainerIcon, IconArea, EmojiText, ContainerTouch, TransparentText } from './styles';
+import { Container, ContainerTouch, TransparentText } from './styles';
 
-class Icon1 extends Component{
+class Target5 extends Component{
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Container>
-        <ContainerIcon>
-          <IconArea>
-            <Icon name="comments" color="#A51C60" size={18} />
-            <EmojiText>Conversas</EmojiText>
-          </IconArea>
-        </ContainerIcon>
         <ContainerTouch>
           <TouchableWithoutFeedback
-            key={'1'}
-            title={'1'}
+            key={'5'}
+            title={'5'}
             ref={ref => {
               if (!ref) return
 
               let props = {
-                order: 1,
-                title: 'Conversas',
-                description: 'Clique aqui para ir para a aba de Conversas',
+                order: 5,
+                title: 'Editar Perfil',
+                description: 'Clique aqui para Editar seu Perfil',
                 outerCircleColor: '#A51C60',
                 titleTextSize: 25,
                 descriptionTextSize: 14,
@@ -45,4 +42,4 @@ class Icon1 extends Component{
   }
 }
 
-export default Icon1;
+export default Target5;
