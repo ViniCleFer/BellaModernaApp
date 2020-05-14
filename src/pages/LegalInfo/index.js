@@ -16,7 +16,7 @@ import {
 
 export default function LegalInfo(props) {
   const navigateBack = () => {
-    props.navigation.navigate('StackAccount');
+    props.navigation.navigate('More');
   };
 
   return (

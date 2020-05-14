@@ -25,12 +25,13 @@ class Target4 extends Component{
 
             let props = {
               order: 4,
-                title: 'Mais',
-                description: 'Clique aqui para ir para a aba Mais Opções!',
-                outerCircleColor: '#A51C60',
-                titleTextSize: 25,
-                descriptionTextSize: 25,
-                targetRadius: 40
+              title: 'Mais',
+              description: 'Clique aqui para ir para a aba Mais Opções!',
+              outerCircleColor: '#A51C60',
+              titleTextSize: 25,
+              descriptionTextSize: 25,
+              targetRadius: 40,
+              cancelable: true,
             }
 
             this.props.addAppTourTarget &&

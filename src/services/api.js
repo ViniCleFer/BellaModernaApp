@@ -8,6 +8,9 @@ export default api;
 
 /* 
 
+  baseURL para Celular Android via USB
+  baseURL: 'http://192.168.0.13:3333'
+
   baseURL para Emulador Android
   baseURL: 'http://10.0.2.2:3333'
   
