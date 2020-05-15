@@ -7,9 +7,15 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { AppTourView } from 'react-native-app-tour';
 
-import { Container, ContainerIcon, IconArea, ContainerTouch, TransparentText } from './styles';
+import {
+  Container,
+  ContainerIcon,
+  IconArea,
+  ContainerTouch,
+  TransparentText,
+} from './styles';
 
-class Target4 extends Component{
+class Target4 extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,12 +24,12 @@ class Target4 extends Component{
     return (
       <ContainerTouch>
         <TouchableWithoutFeedback
-          key={'4'}
-          title={'4'}
-          ref={ref => {
-            if (!ref) return
+          key="4"
+          title="4"
+          ref={(ref) => {
+            if (!ref) return;
 
-            let props = {
+            const props = {
               order: 4,
               title: 'Mais',
               description: 'Clique aqui para ir para a aba Mais Opções!',
@@ -32,14 +38,14 @@ class Target4 extends Component{
               descriptionTextSize: 25,
               targetRadius: 40,
               cancelable: true,
-            }
+            };
 
             this.props.addAppTourTarget &&
-              this.props.addAppTourTarget(AppTourView.for(ref, { ...props }))
+              this.props.addAppTourTarget(AppTourView.for(ref, { ...props }));
           }}
           onPress={() => {}}
         >
-          <TransparentText></TransparentText>
+          <TransparentText />
         </TouchableWithoutFeedback>
       </ContainerTouch>
     );

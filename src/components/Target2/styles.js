@@ -1,5 +1,8 @@
 import styled from 'styled-components/native';
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 export const ContainerTouch = styled.View`
   position: absolute;

@@ -5,20 +5,8 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-export const AddButton = styled.TouchableOpacity`
-  background-color: #a51c60;
-  position: absolute;
-  height: 60;
-  width: 60;
-  border-radius: 50;
-  bottom: 30;
-  right: 30;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ContainerIcon = styled.View`
-  height: ${hp('10.56%')};
+export const Container = styled.View`
+  flex: 1;
   background-color: #ccc;
   flex-direction: row;
   align-items: center;

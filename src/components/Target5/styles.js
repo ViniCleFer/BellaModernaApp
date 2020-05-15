@@ -12,7 +12,6 @@ export const ContainerTouch = styled.View`
   flex: 1;
   z-index: 5;
   left: 30px;
-
 `;
 
 export const TransparentText = styled.Text``;

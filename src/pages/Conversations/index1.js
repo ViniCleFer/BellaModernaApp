@@ -13,7 +13,7 @@ export default function Conversations(props) {
   useEffect(() => {
     this.registerSequenceStepEvent();
     this.registerFinishSequenceEvent();
-    
+
     setTimeout(() => {
       let appTourSequence = new AppTourSequence();
       this.appTourTargets.forEach(appTourTarget => {
