@@ -3,7 +3,17 @@ import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { AddButton } from './styles';
+import {
+  AddButton,
+  ContainerCard,
+  AreaInfos,
+  HourText,
+  ProfileText,
+  InfoArea,
+  InfoText,
+  InfoDoctor,
+  ImageProfile,
+} from './styles';
 
 class Conversations extends Component {
   constructor(props) {
@@ -123,12 +133,25 @@ class Conversations extends Component {
 
   renderItem(item) {
     return (
-      <TouchableOpacity
+      /*  <TouchableOpacity
         style={[styles.item, { height: item.height }]}
         onPress={() => Alert.alert(item.name)}
       >
         <Text>{item.name}</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */
+
+      <ContainerCard>
+        <AreaInfos>
+          <HourText>10:00 AM - 11:00 AM</HourText>
+          <ProfileText>Vinicius Fernandes</ProfileText>
+
+          <InfoArea>
+            <InfoText>Cirurgia</InfoText>
+            <InfoDoctor>com Vinicius Fernandes</InfoDoctor>
+          </InfoArea>
+        </AreaInfos>
+        <ImageProfile alt="Profile Image" style={{ backgroundColor: '#ccc' }} />
+      </ContainerCard>
     );
   }
 

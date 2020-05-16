@@ -17,6 +17,52 @@ export const AddButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
+export const ContainerCard = styled.View`
+  height: ${hp('23%')};
+  width: ${wp('80%')};
+  background-color: #fff;
+  padding-top: ${hp('3.52%')};
+  padding-bottom: ${hp('3.52%')};
+  padding-right: ${wp('6.25%')};
+  padding-left: ${wp('6.25%')};
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fefefe;
+  margin-top: ${hp('1.5%')};
+  margin-bottom: ${hp('1.5%')};
+  border-radius: 4;
+`;
+
+export const AreaInfos = styled.View`
+  flex-direction: column;
+`;
+
+export const HourText = styled.Text`
+  font-size: ${hp('2.12')};
+  color: #8b949b;
+`;
+export const ProfileText = styled.Text`
+  color: #43515c;
+`;
+
+export const InfoArea = styled.View`
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+export const InfoText = styled.Text`
+  color: #a4b4c1;
+`;
+export const InfoDoctor = styled.Text`
+  color: #a4b4c1;
+`;
+
+export const ImageProfile = styled.Image`
+  height: ${hp('9.15%')};
+  width: ${wp('16.25%')};
+  border-radius: 50;
+`;
+
 export const ContainerIcon = styled.View`
   height: ${hp('10.56%')};
   background-color: #ccc;
