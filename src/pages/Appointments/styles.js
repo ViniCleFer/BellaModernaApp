@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+import { BaseButton } from 'react-native-gesture-handler';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -44,7 +44,9 @@ export const SubTitle = styled.Text`
   margin-top: ${hp('2.46%')};
 `;
 
-export const ButtonArea = styled.TouchableOpacity`
+export const SubjectArea = styled.View``;
+
+export const SubjectButton = styled.TouchableOpacity`
   flex-direction: row;
   font-size: ${hp('2.82%')};
   height: ${hp('6.34%')};
@@ -57,20 +59,39 @@ export const ButtonArea = styled.TouchableOpacity`
   border-radius: 4px;
 `;
 
-export const DoctorImage = styled.Image`
-  height: ${hp('4.23%')};
-  width: ${wp('7.50%')};
-  margin-left: ${wp('3.75%')};
-  border-radius: 50;
-  justify-content: center;
-`;
-
-export const DoctorName = styled.Text`
+export const AnswerText = styled.Text`
   font-size: ${hp('2.82%')};
   line-height: ${hp('4.23%')};
   color: #625c70;
   font-weight: normal;
-  margin-left: ${wp('2.5%')};
+  margin-left: ${wp('3.75%')};
+`;
+
+export const Subject = styled.Modal``;
+
+export const SubjectAreaItens = styled.View`
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SubjectItens = styled.View`
+  background-color: #fff;
+  width: ${wp('75.94%')};
+  padding-top: ${hp('2.82%')};
+  padding-bottom: ${hp('2.82%')};
+  padding-left: ${wp('5.0%')};
+  border-radius: 4;
+`;
+
+export const SubjectTextArea = styled.TouchableOpacity``;
+
+export const SubjectText = styled.TextInput`
+  font-size: ${hp('2.82%')};
+  color: #625c70;
+  font-weight: normal;
 `;
 
 export const IconArea = styled.View`
@@ -224,6 +245,7 @@ export const HourContainerItens = styled.View`
   background-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;
+  flex: 1;
 `;
 
 export const HourItens = styled.View`
@@ -243,14 +265,16 @@ export const HourList = styled.FlatList.attrs({
   padding-top: 30px;
 `;
 
-export const HourButton = styled(RectButton)`
-  background: #a51c60;
+export const HourButton = styled(BaseButton)`
+  background: transparent;
+  justify-content: center;
   border-radius: 4px;
-  padding: 20px;
+  padding: 20px 20px 0;
   flex: 1;
   opacity: ${(props) => (props.enabled ? 1 : 0.6)};
   align-items: center;
   margin: 0 10px 20px;
+  color: #fff;
 `;
 
 export const HourText = styled.Text`

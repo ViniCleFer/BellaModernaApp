@@ -43,6 +43,7 @@ export default function DateInput({ date, onChange }) {
             minimumDate={new Date()}
             minuteInterval={60}
             mode="date"
+            locale="pt"
           />
         </Picker>
       )}

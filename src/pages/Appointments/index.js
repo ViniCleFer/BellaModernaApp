@@ -1,15 +1,15 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text } from 'react-native';
-import { format } from 'date-fns-tz';
-import { setHours, setMinutes, setSeconds } from 'date-fns';
+import React, { useState, useMemo, useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
+import uuid from 'uuid/v4';
+import AsyncStorage from '@react-native-community/async-storage';
+import { format, toDate } from 'date-fns-tz';
+
 import pt from 'date-fns/locale/pt-BR';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import { useSelector } from 'react-redux';
 
 import DateInput from '~/components/DateInput';
 
@@ -19,9 +19,14 @@ import {
   Title,
   AreaInfo,
   SubTitle,
-  ButtonArea,
-  DoctorImage,
-  DoctorName,
+  Subject,
+  SubjectArea,
+  SubjectButton,
+  AnswerText,
+  SubjectAreaItens,
+  SubjectItens,
+  SubjectTextArea,
+  SubjectText,
   IconArea,
   RiskArea,
   RiskButton,
@@ -59,32 +64,22 @@ export default function Appointments(props) {
     props.navigation.navigate('Conversations');
   };
 
-  const profile = useSelector((state) => state.user.profile);
+  const dataS = props.navigation.getParam('list');
 
   const schedule = [
-    { key: 1, hours: '08:00', value: '08:00 ás 08:59', available: true },
-    { key: 2, hours: '09:00', valeu: '09:00 ás 09:59', available: true },
-    { key: 3, hours: '10:00', valeu: '10:00 ás 10:59', available: false },
-    { key: 4, hours: '11:00', valeu: '11:00 ás 11:59', available: true },
-    { key: 5, hours: '12:00', valeu: '12:00 ás 12:59', available: true },
-    { key: 6, hours: '13:00', valeu: '13:00 ás 13:59', available: false },
-    { key: 7, hours: '14:00', valeu: '14:00 ás 14:59', available: false },
-    { key: 8, hours: '15:00', valeu: '15:00 ás 15:59', available: true },
-    { key: 9, hours: '16:00', valeu: '16:00 ás 16:59', available: true },
-    { key: 10, hours: '17:00', valeu: '17:00 ás 17:59', available: true },
-    { key: 11, hours: '18:00', valeu: '18:00 ás 18:59', available: true },
-    { key: 12, hours: '19:00', valeu: '19:00 ás 19:59', available: false },
+    { id: 1, time: '08:00', hours: '08:00 ás 08:59', available: true },
+    { id: 2, time: '09:00', hours: '09:00 ás 09:59', available: true },
+    { id: 3, time: '10:00', hours: '10:00 ás 10:59', available: false },
+    { id: 4, time: '11:00', hours: '11:00 ás 11:59', available: true },
+    { id: 5, time: '12:00', hours: '12:00 ás 12:59', available: true },
+    { id: 6, time: '13:00', hours: '13:00 ás 13:59', available: false },
+    { id: 7, time: '14:00', hours: '14:00 ás 14:59', available: true },
+    { id: 8, time: '15:00', hours: '15:00 ás 15:59', available: true },
+    { id: 9, time: '16:00', hours: '16:00 ás 16:59', available: true },
+    { id: 10, time: '17:00', hours: '17:00 ás 17:59', available: true },
+    { id: 11, time: '18:00', hours: '18:00 ás 18:59', available: true },
+    { id: 12, time: '19:00', hours: '19:00 ás 19:59', available: true },
   ];
-
-  const renderLabel = (label, style) => {
-    return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View>
-          <Text style={style}>{label}</Text>
-        </View>
-      </View>
-    );
-  };
 
   const hourFormatted = useMemo(
     () =>
@@ -95,12 +90,24 @@ export default function Appointments(props) {
     []
   );
 
+  const [subject, setSubject] = useState('Escolha o médico');
+  const [modalSubjectVisible, setModalSubjectVisible] = useState(false);
   const [risk, setRisk] = useState('Escolha o atendimento');
   const [colorRisk, setColorRisk] = useState(<RiskColorGray />);
   const [modalRiskVisible, setModalRiskVisible] = useState(false);
   const [date, setDate] = useState(new Date());
+  const [itens, setItens] = useState(schedule);
   const [hour, setHour] = useState(`${hourFormatted} horas`);
+  const [hours, setHours] = useState(`${hourFormatted} horas`);
   const [modalHourVisible, setModalHourVisible] = useState(false);
+  const [items, setItems] = useState(dataS);
+
+  // const jsonValue = JSON.stringify({ date });
+
+  function handleSubject(value) {
+    setSubject(value);
+    setModalSubjectVisible(false);
+  }
 
   function handleRedRisk(value) {
     setRisk(value);
@@ -120,6 +127,32 @@ export default function Appointments(props) {
     setModalRiskVisible(false);
   }
 
+  function handleHour(time, hours) {
+    setHour(time);
+    setHours(hours);
+    setModalHourVisible(false);
+  }
+
+  const handleSubmit = async () => {
+    // eslint-disable-next-line prefer-const
+    let itemsList = [...items];
+    itemsList.push({
+      id: uuid(),
+      subject,
+      risk,
+      date,
+      hours,
+    });
+    setItems(itemsList);
+
+    const data = JSON.stringify(itemsList);
+    await AsyncStorage.setItem('@appointments', data);
+
+    props.navigation.navigate('AppointmentsDoctor');
+  };
+
+  useEffect(() => {}, []);
+
   return (
     <Container showsVerticalScrollIndicator={false}>
       <TitleArea>
@@ -132,29 +165,50 @@ export default function Appointments(props) {
         />
         <Title>Preencher Agendamento</Title>
       </TitleArea>
-
       <AreaInfo>
         <SubTitle>Médico</SubTitle>
-        <ButtonArea activeOpacity={0.6} onPress={() => {}}>
-          <DoctorImage
-            source={{
-              uri: `http://192.168.0.13:3333/files/${profile.image_url}`,
-            }}
-          />
-          <DoctorName>{profile.name}</DoctorName>
-
-          <IconArea>
-            <Icon
-              name="arrow-drop-down"
-              size={22}
-              color="#625C70"
-              style={{
-                marginRight: wp('3%'),
-                alignItems: 'center',
-              }}
-            />
-          </IconArea>
-        </ButtonArea>
+        <SubjectArea>
+          <SubjectButton
+            activeOpacity={0.6}
+            onPress={() => setModalSubjectVisible(true)}
+          >
+            <AnswerText>{subject}</AnswerText>
+            <IconArea>
+              <Icon
+                name="arrow-drop-down"
+                size={22}
+                color="#625C70"
+                style={{
+                  marginRight: wp('3%'),
+                  alignItems: 'center',
+                }}
+              />
+            </IconArea>
+          </SubjectButton>
+          <Subject
+            visible={modalSubjectVisible}
+            animationType="fade"
+            transparent
+            onRequestClose={() => setModalSubjectVisible(false)}
+          >
+            <SubjectAreaItens>
+              <SubjectItens>
+                <SubjectTextArea onPress={() => handleSubject('Dra. Maria')}>
+                  <SubjectText value="Dra. Maria" editable={false} />
+                </SubjectTextArea>
+                <SubjectTextArea onPress={() => handleSubject('Dr. Edvaldo')}>
+                  <SubjectText value="Dr. Edvaldo" editable={false} />
+                </SubjectTextArea>
+                <SubjectTextArea onPress={() => handleSubject('Dr. Junior')}>
+                  <SubjectText value="Dr. Junior" editable={false} />
+                </SubjectTextArea>
+                <SubjectTextArea onPress={() => handleSubject('Dr. Ademilson')}>
+                  <SubjectText value="Dr. Ademilson" editable={false} />
+                </SubjectTextArea>
+              </SubjectItens>
+            </SubjectAreaItens>
+          </Subject>
+        </SubjectArea>
 
         <SubTitle>Tipo do Atendimento</SubTitle>
         <RiskArea>
@@ -234,7 +288,7 @@ export default function Appointments(props) {
                   alignItems: 'center',
                 }}
               />
-              <HourTextSelected>{hour}</HourTextSelected>
+              <HourTextSelected>{hour} horas</HourTextSelected>
             </HourSelected>
 
             <IconArea>
@@ -258,12 +312,32 @@ export default function Appointments(props) {
             <HourContainerItens>
               <HourItens>
                 <HourList
-                  data={schedule}
-                  keyExtractor={(item) => item.key}
+                  data={itens}
+                  keyExtractor={(item) => item.id}
                   renderItem={({ item }) => (
-                    <HourButton onPress={() => {}} enabled={item.available}>
-                      <HourText>{item.hours}</HourText>
-                    </HourButton>
+                    <TouchableOpacity
+                      activeOpacity={0.9}
+                      style={{
+                        backgroundColor: '#a51c60',
+                        borderRadius: 4,
+                        paddingBottom: -40,
+                        flex: 1,
+                        opacity: (props) => (props.enabled ? 1 : 0.6),
+                        alignItems: 'center',
+                        marginTop: 0,
+                        marginHorizontal: 10,
+                        marginBottom: 20,
+                        color: '#fff',
+                      }}
+                      enabled={item.available}
+                      onPress={() => handleHour(item.time, item.hours)}
+                    >
+                      <>
+                        <HourButton>
+                          <HourText>{item.time}</HourText>
+                        </HourButton>
+                      </>
+                    </TouchableOpacity>
                   )}
                 />
               </HourItens>
@@ -271,10 +345,9 @@ export default function Appointments(props) {
           </HourArea>
         </SelectHourArea>
       </AreaInfo>
-
       <AreaSubmitButton>
         <SubmitButton
-          onPress={() => {}}
+          onPress={() => handleSubmit()}
           activeOpacity={0.7}
           style={{
             borderRadius: 50,
@@ -292,82 +365,3 @@ export default function Appointments(props) {
     </Container>
   );
 }
-
-/*
-
-<ConclusionTextArea
-                  onPress={() => handleConclusion('Internação concluída')}
-                >
-                  <ConclusionText>Interação concluída</ConclusionText>
-                </ConclusionTextArea>
-                <ConclusionTextArea
-                  onPress={() =>
-                    handleConclusion('Orientada a retornar para reavaliação')
-                  }
-                >
-                  <ConclusionText>
-                    Orientada a retornar para reavaliação
-                  </ConclusionText>
-                </ConclusionTextArea>
-                <ConclusionTextArea
-                  onPress={() =>
-                    handleConclusion(
-                      'Orientada a realizar uma interação com outro profissional'
-                    )
-                  }
-                >
-                  <ConclusionText>
-                    Orientada a realizar uma interação com outro profissional
-                  </ConclusionText>
-                </ConclusionTextArea>
-                <ConclusionTextArea
-                  onPress={() =>
-                    handleConclusion(
-                      'Orientada a procurar uma avaliação médica nas próximas 24h'
-                    )
-                  }
-                >
-                  <ConclusionText>
-                    Orientada a procurar uma avaliação médica nas próximas 24h
-                  </ConclusionText>
-                </ConclusionTextArea>
-                <ConclusionTextArea
-                  onPress={() =>
-                    handleConclusion(
-                      'Orientada a procurar um pronto atendimento'
-                    )
-                  }
-                >
-                  <ConclusionText>
-                    Orientada a procurar um pronto atendimento
-                  </ConclusionText>
-                </ConclusionTextArea>
-
-
-const styles = StyleSheet.create({
-  dataPiker: {
-    backgroundColor: 'blue',
-    fontSize: hp('2.82%'),
-    color: '#625c70',
-    fontWeight: 'normal',
-    marginLeft: wp('3.75%'),
-  },
-});
-
-
-
-<AreaProblem>
-  {item.problems.map((problems) => (
-    <InfoProblem>
-      <Icon
-        name="check"
-        color="#A51C60"
-        size={18}
-        style={{ marginRight: wp('1.88%') }}
-      />
-      <BodyText>{problems}</BodyText>
-    </InfoProblem>
-  ))}
-</AreaProblem>
-
-*/

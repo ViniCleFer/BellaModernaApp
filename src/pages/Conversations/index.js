@@ -52,7 +52,7 @@ class Conversations extends Component {
           // futureScrollRange={24}
           // renderItem é Card do Agendamento
           renderItem={this.renderItem.bind(this)}
-          renderEmptyDate={this.renderEmptyDate.bind(this)}
+          // renderEmptyDate={this.renderEmptyDate.bind(this)}
           rowHasChanged={this.rowHasChanged.bind(this)}
           renderKnob={() => {
             return <Icon name="chevron-down" size={20} color="#a51c60" />;
@@ -93,7 +93,7 @@ class Conversations extends Component {
             },
             elevation: 4,
           }}
-          onPress={() => this.props.navigation.navigate('Appointments')}
+          onPress={() => this.props.navigation.navigate('AppointmentsDoctor')} // AppointmentsDoctor Appointments
         >
           <Icon name="calendar-plus" size={20} color="#fff" />
         </AddButton>
