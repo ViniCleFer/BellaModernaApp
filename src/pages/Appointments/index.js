@@ -67,18 +67,18 @@ export default function Appointments(props) {
   const dataS = props.navigation.getParam('list');
 
   const schedule = [
-    { id: 1, time: '08:00', hours: '08:00 ás 08:59', available: true },
-    { id: 2, time: '09:00', hours: '09:00 ás 09:59', available: true },
-    { id: 3, time: '10:00', hours: '10:00 ás 10:59', available: false },
-    { id: 4, time: '11:00', hours: '11:00 ás 11:59', available: true },
-    { id: 5, time: '12:00', hours: '12:00 ás 12:59', available: true },
-    { id: 6, time: '13:00', hours: '13:00 ás 13:59', available: false },
-    { id: 7, time: '14:00', hours: '14:00 ás 14:59', available: true },
-    { id: 8, time: '15:00', hours: '15:00 ás 15:59', available: true },
-    { id: 9, time: '16:00', hours: '16:00 ás 16:59', available: true },
-    { id: 10, time: '17:00', hours: '17:00 ás 17:59', available: true },
-    { id: 11, time: '18:00', hours: '18:00 ás 18:59', available: true },
-    { id: 12, time: '19:00', hours: '19:00 ás 19:59', available: true },
+    { id: 1, time: '08:00', hours: '08:00 - 08:59', available: true },
+    { id: 2, time: '09:00', hours: '09:00 - 09:59', available: true },
+    { id: 3, time: '10:00', hours: '10:00 - 10:59', available: false },
+    { id: 4, time: '11:00', hours: '11:00 - 11:59', available: true },
+    { id: 5, time: '12:00', hours: '12:00 - 12:59', available: true },
+    { id: 6, time: '13:00', hours: '13:00 - 13:59', available: false },
+    { id: 7, time: '14:00', hours: '14:00 - 14:59', available: true },
+    { id: 8, time: '15:00', hours: '15:00 - 15:59', available: true },
+    { id: 9, time: '16:00', hours: '16:00 - 16:59', available: true },
+    { id: 10, time: '17:00', hours: '17:00 - 17:59', available: true },
+    { id: 11, time: '18:00', hours: '18:00 - 18:59', available: true },
+    { id: 12, time: '19:00', hours: '19:00 - 19:59', available: true },
   ];
 
   const hourFormatted = useMemo(
