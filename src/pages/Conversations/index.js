@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useSelector } from 'react-redux';
 
 import {
   AddButton,
@@ -16,6 +17,8 @@ import {
 } from './styles';
 
 export default function Conversations({ navigation }) {
+  const profile = useSelector((state) => state.user.profile);
+
   const [items, setItems] = useState([]);
 
   const medExams = {
@@ -54,7 +57,7 @@ export default function Conversations({ navigation }) {
           for (let j = 0; j < numItems; j++) {
             items[strTime].push({
               hours: "10:00 AM - 11:00 AM",
-              profile: "Vinícius Fernandes",
+              profile: `${profile.name}`,
               type: "cirurgia",
               doctor: "Edvaldo"
             });

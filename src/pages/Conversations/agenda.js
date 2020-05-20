@@ -1,54 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Agenda } from 'react-native-calendars';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useSelector } from 'react-redux';
+import React, {Component} from 'react';
+import {Alert, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Agenda} from 'react-native-calendars';
 
-export default function Conversations(props) {
-  const profile = useSelector((state) => state.user.profile);
+export default class AgendaScreen extends Component {
+  constructor(props) {
+    super(props);
 
-  const [items, setItems] = useState({});
-
-  function loadItems(day) {
-    setTimeout(() => {
-      // const time = day.timestamp + 80 * 24 * 60 * 60 * 1000;
-      // const strTime = timeToString(time);
-      // const stampTime = timeToString(day.timestamp);
-      // console.tron.log('este é o day', day);
-      // day = retorna day: {
-      //  year:2020
-      //  month:5
-      //  day:14
-      //  timestamp:1589414400000
-      //  dateString:2020-05-14
-      // }
-      // console.tron.log('este é o dayTimestamp', day.timestamp);
-      // day.timestamp = hoje - retorna 14/05/2020
-      // console.tron.log('este é o time', time);
-      // time é 02/08/2020 retornado em timestamp
-      // console.tron.log('este é o strtime', strTime);
-      // strTime = retorna 02/08/2020
-      // console.tron.log(
-      //   'este é o day.timestamp convertido para string',
-      //  stampTime
-      // );
-      // stampTime = hoje - retorna 14/05/2020
-      // eslint-disable-next-line prefer-const
-      // let newItems = {};
-      //  Object.keys(items).forEach((key) => {
-      //    newItems[key] = setItems([key]);
-      //  });
-      // setItems({
-      //  items: newItems,
-      // });
-    }, 1000);
-    console.tron.log('este é o setItems', setItems());
+    this.state = {
+      items: {}
+    };
   }
 
-  function renderItem(item) {
+  render() {
+    return (
+      <Agenda
+        items={this.state.items}
+        loadItemsForMonth={this.loadItems.bind(this)}
+        selected={'2017-05-16'}
+        renderItem={this.renderItem.bind(this)}
+        renderEmptyDate={this.renderEmptyDate.bind(this)}
+        rowHasChanged={this.rowHasChanged.bind(this)}
+        // markingType={'period'}
+        // markedDates={{
+        //    '2017-05-08': {textColor: '#43515c'},
+        //    '2017-05-09': {textColor: '#43515c'},
+        //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+        //    '2017-05-21': {startingDay: true, color: 'blue'},
+        //    '2017-05-22': {endingDay: true, color: 'gray'},
+        //    '2017-05-24': {startingDay: true, color: 'gray'},
+        //    '2017-05-25': {color: 'gray'},
+        //    '2017-05-26': {endingDay: true, color: 'gray'}}}
+        // monthFormat={'yyyy'}
+        // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
+        //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+        // hideExtraDays={false}
+      />
+    );
+  }
+
+  loadItems(day) {
+    setTimeout(() => {
+      for (let i = -15; i < 85; i++) {
+        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+        const strTime = this.timeToString(time);
+        if (!this.state.items[strTime]) {
+          this.state.items[strTime] = [];
+          const numItems = Math.floor(Math.random() * 3 + 1);
+          for (let j = 0; j < numItems; j++) {
+            this.state.items[strTime].push({
+              name: 'Item for ' + strTime + ' #' + j,
+              height: Math.max(50, Math.floor(Math.random() * 150))
+            });
+          }
+        }
+      }
+      const newItems = {};
+      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+      this.setState({
+        items: newItems
+      });
+    }, 1000);
+  }
+
+  renderItem(item) {
     return (
       <TouchableOpacity
-        style={[styles.item, { height: item.height }]}
+        testID={testIDs.agenda.ITEM}
+        style={[styles.item, {height: item.height}]}
         onPress={() => Alert.alert(item.name)}
       >
         <Text>{item.name}</Text>
@@ -56,7 +74,7 @@ export default function Conversations(props) {
     );
   }
 
-  function renderEmptyDate() {
+  renderEmptyDate() {
     return (
       <View style={styles.emptyDate}>
         <Text>This is empty date!</Text>
@@ -64,74 +82,14 @@ export default function Conversations(props) {
     );
   }
 
-  function rowHasChanged(r1, r2) {
+  rowHasChanged(r1, r2) {
     return r1.name !== r2.name;
   }
 
-  function timeToString(time) {
+  timeToString(time) {
     const date = new Date(time);
     return date.toISOString().split('T')[0];
   }
-
-  const medExams = {
-    key: 'medExams',
-    color: '#E48ABF',
-    selectedDotColor: '#E48ABF',
-  };
-  const medAppointment = {
-    key: 'medAppointment',
-    color: '#FA375A',
-    selectedDotColor: '#FA375A',
-  };
-  const surgery = {
-    key: 'surgery',
-    color: '#A51C60',
-    selectedDotColor: '#A51C60',
-  };
-
-  return (
-    <Agenda
-      items={items}
-      loadItemsForMonth={loadItems}
-      selected={new Date()}
-      minDate={new Date()}
-      // pastScrollRange={24}
-      // futureScrollRange={24}
-      scrollEnabled
-      // Enable or disable vertical scroll indicator. Default = false
-      showScrollIndicator
-      // renderItem é Card do Agendamento
-      renderItem={() => renderItem}
-      renderEmptyDate={renderEmptyDate}
-      rowHasChanged={rowHasChanged}
-      renderKnob={() => {
-        return <Icon name="chevron-down" size={20} color="#a51c60" />;
-      }}
-      markingType="multi-dot"
-      markedDates={{
-        '2020-05-12': { textColor: '#43515c' },
-        '2020-05-13': { textColor: '#43515c' },
-        '2020-05-14': { startingDay: true, endingDay: true, color: 'blue' },
-        '2020-05-15': {
-          dots: [medExams, medAppointment, surgery],
-        },
-        '2020-05-16': { dots: [medAppointment, surgery] },
-        '2020-05-20': { startingDay: true, color: 'gray' },
-        '2020-05-25': { color: 'gray' },
-        '2020-05-26': { endingDay: true, color: 'gray' },
-      }}
-      // monthFormat={'yyyy'}
-      theme={{
-        agendaTodayColor: '#A51C60',
-        selectedDayBackgroundColor: '#A51C60',
-        todayTextColor: '#A51C60',
-        dayTextColor: '#E48ABF',
-        textDayFontSize: 15.5,
-      }}
-      // renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-      // hideExtraDays={false}
-    />
-  );
 }
 
 const styles = StyleSheet.create({
@@ -141,11 +99,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
-    marginTop: 17,
+    marginTop: 17
   },
   emptyDate: {
     height: 15,
-    flex: 1,
-    paddingTop: 30,
-  },
+    flex:1,
+    paddingTop: 30
+  }
 });
