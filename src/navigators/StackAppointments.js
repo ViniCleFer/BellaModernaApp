@@ -8,18 +8,18 @@ import AppointmentsDate from '~/pages/AppointmentsDate';
 import AppointmentsHour from '~/pages/AppointmentsHour';
 
 const StackAppointments = createStackNavigator({
-  AppointmentsDoctor: {
-    screen: AppointmentsDoctor,
-    navigationOptions: {
-      header: null,
-      title: 'AppointmentsDoctor',
-    },
-  },
   Conversations: {
     screen: Conversations,
     navigationOptions: {
       header: null,
       title: 'Conversations',
+    },
+  },
+  AppointmentsDoctor: {
+    screen: AppointmentsDoctor,
+    navigationOptions: {
+      header: null,
+      title: 'AppointmentsDoctor',
     },
   },
   Appointments: {
