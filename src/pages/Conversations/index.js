@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Agenda } from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
+import { Modalize } from 'react-native-modalize';
+import { DeviceEventEmitter } from 'react-native';
+import { AppTour, AppTourSequence } from 'react-native-app-tour';
+
+import Target1 from '~/components/Target1';
+import Target2 from '~/components/Target2';
+import Target3 from '~/components/Target3';
+import Target4 from '~/components/Target4';
 
 import {
+  TargetView,
   AddButton,
+  ModalView,
+  ModalText,
   ContainerCard,
   AreaInfos,
   HourText,
@@ -15,8 +26,49 @@ import {
   ImageProfile,
 } from './styles';
 
-export default function Conversations({ navigation }) {
+export default function Conversations(props) {
   const profile = useSelector((state) => state.user.profile);
+
+  appTourTargets = [];
+
+  useEffect(() => {
+    this.registerSequenceStepEvent();
+    this.registerFinishSequenceEvent();
+
+    setTimeout(() => {
+      let appTourSequence = new AppTourSequence();
+      this.appTourTargets.forEach(appTourTarget => {
+        appTourSequence.add(appTourTarget);
+      })
+
+      AppTour.ShowSequence(appTourSequence);
+    }, 1000);
+  },[]);
+
+  registerSequenceStepEvent = () => {
+    if (this.sequenceStepListener) {
+      this.sequenceStepListener.remove();
+    }
+    this.sequenceStepListener = DeviceEventEmitter.addListener(
+      'onShowSequenceStepEvent',
+      (e: Event) => {
+        console.log(e);
+      },
+    );
+  };
+
+  registerFinishSequenceEvent = () => {
+    if (this.finishSequenceListener) {
+      this.finishSequenceListener.remove();
+    }
+    this.finishSequenceListener = DeviceEventEmitter.addListener(
+      'onFinishSequenceEvent',
+      (e: Event) => {
+        props.navigation.navigate('More')
+        console.log('acabou');
+      },
+    );
+  };
 
   const [items, setItems] = useState({
     '2020-05-21': [
@@ -78,7 +130,11 @@ export default function Conversations({ navigation }) {
     selectedDotColor: '#A51C60',
   };
 
-  function HandleModal() {}
+  const modalizeRef = useRef(Modalize);
+
+  function HandleModal() {
+    modalizeRef.current.open();
+  }
 
   function renderItem(item) {
     switch (item.type) {
@@ -175,6 +231,8 @@ export default function Conversations({ navigation }) {
 
   return (
     <>
+
+
       <Agenda
         style={{ flex: 1 }}
         items={items}
@@ -220,10 +278,42 @@ export default function Conversations({ navigation }) {
           },
           elevation: 4,
         }}
-        onPress={() => navigation.navigate('Appointments')}
+        onPress={() => props.navigation.navigate('Appointments')}
       >
         <Icon name="calendar-plus" size={20} color="#fff" />
       </AddButton>
+
+      <Modalize ref={modalizeRef}>
+        <ModalView>
+          <ModalText>Conteúdo Semana á Semana</ModalText>
+        </ModalView>
+      </Modalize>
+
+      <TargetView>
+        <Target1
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget);
+          }}
+        />
+
+        <Target2
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget);
+          }}
+        />
+
+        <Target3
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget);
+          }}
+        />
+
+        <Target4
+          addAppTourTarget={appTourTarget => {
+            this.appTourTargets.push(appTourTarget);
+          }}
+        />
+      </TargetView>
     </>
   );
 }

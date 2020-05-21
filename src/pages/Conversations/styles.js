@@ -1,18 +1,32 @@
 import styled from 'styled-components/native';
-
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
+export const TargetView = styled.View``;
+
+export const ModalView = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ModalText = styled.Text`
+  padding-top: ${hp('5.28%')};
+  font-size: ${hp('3.52%')};
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const AddButton = styled.TouchableOpacity`
   background-color: #a51c60;
   position: absolute;
-  height: 60;
-  width: 60;
+  height: ${hp('10.56%')};
+  width: ${wp('18.75%')};
   border-radius: 50;
-  bottom: 30;
-  right: 30;
+  bottom: ${hp('1.5%')};
+  right: ${wp('3.8%')};
   justify-content: center;
   align-items: center;
 `;

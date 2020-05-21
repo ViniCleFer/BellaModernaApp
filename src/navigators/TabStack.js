@@ -15,7 +15,6 @@ const TabStack = createBottomTabNavigator(
       navigationOptions: {
         header: null,
         title: 'Conversas',
-        tabBarVisible: false,
       },
     },
     Records: {

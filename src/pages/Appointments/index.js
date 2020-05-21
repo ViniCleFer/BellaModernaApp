@@ -148,7 +148,7 @@ export default function Appointments({ navigation }) {
     const data = JSON.stringify(itemsList);
     await AsyncStorage.setItem('@appointments', data);
 
-    navigation.navigate('AppointmentsDoctor');
+    navigation.navigate('Conversations');
   };
 
   useEffect(() => {}, []);
