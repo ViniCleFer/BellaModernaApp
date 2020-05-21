@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import uuid from 'uuid/v4';
 import AsyncStorage from '@react-native-community/async-storage';
-import { format, toDate } from 'date-fns-tz';
+import { format } from 'date-fns-tz';
 
 import pt from 'date-fns/locale/pt-BR';
 import {
@@ -59,12 +59,12 @@ import {
   TextSubmitButton,
 } from './styles';
 
-export default function Appointments(props) {
+export default function Appointments({ navigation }) {
   const navigateBack = () => {
-    props.navigation.navigate('Conversations');
+    navigation.navigate('Conversations');
   };
 
-  const dataS = props.navigation.getParam('list');
+  const dataS = navigation.getParam('list');
 
   const schedule = [
     { id: 1, time: '08:00', hours: '08:00 - 08:59', available: true },
@@ -148,7 +148,7 @@ export default function Appointments(props) {
     const data = JSON.stringify(itemsList);
     await AsyncStorage.setItem('@appointments', data);
 
-    props.navigation.navigate('AppointmentsDoctor');
+    navigation.navigate('AppointmentsDoctor');
   };
 
   useEffect(() => {}, []);
@@ -241,24 +241,28 @@ export default function Appointments(props) {
           >
             <RiskContainerItens>
               <RiskItens>
-                <RiskButtonItem onPress={() => handlePinkRisk('Rotina')}>
+                <RiskButtonItem onPress={() => handlePinkRisk('Monitoramento')}>
                   <RiskAreaItens>
                     <RiskColorPink />
-                    <RiskText>Rotina</RiskText>
-                  </RiskAreaItens>
-                </RiskButtonItem>
-                <RiskButtonItem onPress={() => handleRedRisk('Urgência')}>
-                  <RiskAreaItens>
-                    <RiskColorRed />
-                    <RiskText>Urgência</RiskText>
+                    <RiskText>Monitoramento</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
                 <RiskButtonItem
-                  onPress={() => handlePurRiskColorPurpleRisk('Cirurgia')}
+                  onPress={() => handleRedRisk('Agendamento de consulta')}
+                >
+                  <RiskAreaItens>
+                    <RiskColorRed />
+                    <RiskText>Agendamento de consulta</RiskText>
+                  </RiskAreaItens>
+                </RiskButtonItem>
+                <RiskButtonItem
+                  onPress={() =>
+                    handlePurRiskColorPurpleRisk('Semana á semana')
+                  }
                 >
                   <RiskAreaItens>
                     <RiskColorPurple />
-                    <RiskText>Cirurgia</RiskText>
+                    <RiskText>Semana á semana</RiskText>
                   </RiskAreaItens>
                 </RiskButtonItem>
               </RiskItens>
@@ -322,7 +326,7 @@ export default function Appointments(props) {
                         borderRadius: 4,
                         paddingBottom: -40,
                         flex: 1,
-                        opacity: (props) => (props.enabled ? 1 : 0.6),
+                        opacity: ({ enabled }) => (enabled ? 1 : 0.6),
                         alignItems: 'center',
                         marginTop: 0,
                         marginHorizontal: 10,

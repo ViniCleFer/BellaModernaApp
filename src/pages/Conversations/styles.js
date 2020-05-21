@@ -17,7 +17,7 @@ export const AddButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const ContainerCard = styled.View`
+export const ContainerCard = styled.TouchableOpacity`
   width: ${wp('80%')};
   background-color: #fff;
   padding-top: ${hp('3%')};
